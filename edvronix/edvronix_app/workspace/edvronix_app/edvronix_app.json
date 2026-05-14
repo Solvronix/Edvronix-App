@@ -1,0 +1,179 @@
+{
+ "app": "edvronix",
+ "charts": [],
+ "content": "[{\"id\":\"edv_sp1\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"edv_h1\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Your Shortcuts</b></span>\",\"col\":12}},{\"id\":\"edv_sc1\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sales Invoice\",\"col\":3}},{\"id\":\"edv_sc3\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Student\",\"col\":3}},{\"id\":\"edv_sp2\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"edv_h2\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Reports</b></span>\",\"col\":12}},{\"id\":\"edv_c1\",\"type\":\"card\",\"data\":{\"card_name\":\"Fee Reports\",\"col\":4}},{\"id\":\"edv_c2\",\"type\":\"card\",\"data\":{\"card_name\":\"Student Reports\",\"col\":4}},{\"id\":\"edv_c3\",\"type\":\"card\",\"data\":{\"card_name\":\"Admission and Guardian Reports\",\"col\":4}}]",
+ "creation": "2026-05-14 00:00:00",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "education",
+ "idx": 0,
+ "is_hidden": 0,
+ "label": "Edvronix App",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Student Reports",
+   "link_count": 0,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Defaulter Students Report",
+   "link_count": 0,
+   "link_to": "Defaulter Students Report",
+   "link_type": "Report",
+   "onboard": 0,
+   "report_ref_doctype": "Student",
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Student Strength Report",
+   "link_count": 0,
+   "link_to": "Student Strength Report",
+   "link_type": "Report",
+   "onboard": 0,
+   "report_ref_doctype": "Student",
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Student Stuck Off Report",
+   "link_count": 0,
+   "link_to": "Student Stuck Off Report",
+   "link_type": "Report",
+   "onboard": 0,
+   "report_ref_doctype": "Student",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Admission and Guardian Reports",
+   "link_count": 0,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Admission Summary Report",
+   "link_count": 0,
+   "link_to": "Admission Summary Report",
+   "link_type": "Report",
+   "onboard": 0,
+   "report_ref_doctype": "Student Applicant",
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Guardian Contact Details",
+   "link_count": 0,
+   "link_to": "Guardian Contact Details",
+   "link_type": "Report",
+   "onboard": 0,
+   "report_ref_doctype": "Guardian",
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Guardian with there Child Details Report",
+   "link_count": 0,
+   "link_to": "Guardian with there Child Details Report",
+   "link_type": "Report",
+   "onboard": 0,
+   "report_ref_doctype": "Guardian",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Fee Reports",
+   "link_count": 3,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Monthly Outstanding or Dues Report",
+   "link_count": 0,
+   "link_to": "Monthly Outstanding or Dues Report",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Sales Invoice Item Report",
+   "link_count": 0,
+   "link_to": "Sales Invoice Item Report",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Fee Vouher in Bulk with Bank",
+   "link_count": 0,
+   "link_to": "Fee Vouher in Bulk with Bank",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2026-05-14 15:37:03.399420",
+ "modified_by": "Administrator",
+ "module": "Edvronix App",
+ "name": "Edvronix App",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "restrict_to_domain": "",
+ "roles": [],
+ "sequence_id": 20.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "format": "",
+   "label": "Sales Invoice",
+   "link_to": "Sales Invoice",
+   "stats_filter": "",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "format": "",
+   "label": "Student",
+   "link_to": "Student",
+   "stats_filter": "",
+   "type": "DocType"
+  }
+ ],
+ "title": "Edvronix App",
+ "type": "Workspace"
+}

@@ -1,0 +1,40 @@
+{
+ "add_total_row": 0,
+ "add_translate_data": 0,
+ "columns": [],
+ "creation": "2026-01-28 11:47:43.986243",
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letter_head": null,
+ "modified": "2026-02-20 11:11:03.262880",
+ "modified_by": "Administrator",
+ "module": "Edvronix App",
+ "name": "Guardian with there Child Details Report",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "ref_doctype": "Guardian",
+ "report_name": "Guardian with there Child Details Report",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "Academics User"
+  },
+  {
+   "role": "Operation Officer"
+  },
+  {
+   "role": "Admission Officer"
+  },
+  {
+   "role": "School Administrator"
+  },
+  {
+   "role": "Accounts & Finance Officer"
+  }
+ ],
+ "timeout": 0
+}

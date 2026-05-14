@@ -2,7 +2,7 @@ app_name = "edvronix"
 app_title = "Edvronix"
 app_publisher = "Solvronix"
 app_description = "School Management System by Solvronix"
-app_email = "ahsan.javaid@solvronix.com"
+app_email = "info@solvronix.com"
 app_license = "mit"
 
 # Apps
@@ -15,7 +15,7 @@ app_license = "mit"
 # 	{
 # 		"name": "edvronix",
 # 		"logo": "/assets/edvronix/logo.png",
-# 		"title": "Edvronix",
+# 		"title": "Edvronix App",
 # 		"route": "/edvronix",
 # 		"has_permission": "edvronix.api.permission.has_app_permission"
 # 	}
@@ -70,9 +70,6 @@ app_license = "mit"
 # automatically create page for each record of this doctype
 # website_generators = ["Web Page"]
 
-# automatically load and sync documents of this doctype from downstream apps
-# importable_doctypes = [doctype_1]
-
 # Jinja
 # ----------
 
@@ -110,12 +107,6 @@ app_license = "mit"
 # before_app_uninstall = "edvronix.utils.before_app_uninstall"
 # after_app_uninstall = "edvronix.utils.after_app_uninstall"
 
-# Build
-# ------------------
-# To hook into the build process
-
-# after_build = "edvronix.build.after_build"
-
 # Desk Notifications
 # ------------------
 # See frappe.core.notifications.get_notification_config
@@ -134,17 +125,60 @@ app_license = "mit"
 # 	"Event": "frappe.desk.doctype.event.event.has_permission",
 # }
 
+# DocType Class
+# ---------------
+# Override standard doctype classes
+
+# override_doctype_class = {
+# 	"ToDo": "custom_app.overrides.CustomToDo"
+# }
+
 # Document Events
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+    "Sales Invoice": {
+        # "after_insert": "edvronix.events.override_invoice_rates",
+        "before_insert": "edvronix.events.override_invoice_rates"
+    },
+    "Workspace": {
+        "on_update": "edvronix.workspace_utils.export_workspace_on_save"
+    }
+}
+
+override_whitelisted_methods = {
+    "frappe.desk.doctype.workspace.workspace.save_page": "edvronix.workspace_utils.save_page"
+}
+
+fixtures = [
+    {
+        "dt": "Custom Field",
+        "filters": [
+            ["name", "in", [
+                "Program Enrollment-custom_monthy_fee_",
+                "Program Enrollment-custom_tuition_fee",
+                "Student Applicant-custom_cnic_no",
+                "Student Applicant-workflow_state",
+                "Student Applicant-custom_remarks",
+                "Student-custom_bform_image",
+                "Guardian-custom_cnic_no",
+                "Guardian-custom_cnic_img",
+                "Sales Order-column_break_ejcc",
+                "Sales Order-fee_schedule",
+                "Sales Order-student",
+                "Sales Order-student_info_section",
+                "Sales Invoice-column_break_ejcc",
+                "Sales Invoice-fee_schedule",
+                "Sales Invoice-student",
+                "Sales Invoice-student_info_section"
+            ]]
+        ]
+    }
+]
+
+
+
 
 # Scheduled Tasks
 # ---------------
@@ -171,14 +205,6 @@ app_license = "mit"
 # -------
 
 # before_tests = "edvronix.install.before_tests"
-
-# Extend DocType Class
-# ------------------------------
-#
-# Specify custom mixins to extend the standard doctype controller.
-# extend_doctype_class = {
-# 	"Task": "edvronix.custom.task.CustomTaskMixin"
-# }
 
 # Overriding Methods
 # ------------------------------

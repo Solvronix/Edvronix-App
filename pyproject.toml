@@ -1,7 +1,7 @@
 [project]
 name = "edvronix"
 authors = [
-    { name = "Solvronix", email = "ahsan.javaid@solvronix.com"}
+    { name = "Solvronix", email = "info@solvronix.com"}
 ]
 description = "School Management System by Solvronix"
 requires-python = ">=3.14"

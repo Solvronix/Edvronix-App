@@ -1,0 +1,75 @@
+{
+ "add_total_row": 0,
+ "add_translate_data": 0,
+ "columns": [],
+ "creation": "2026-01-05 10:42:15.588716",
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [
+  {
+   "fieldname": "guardian",
+   "fieldtype": "Link",
+   "label": "Guardian",
+   "mandatory": 1,
+   "options": "Guardian",
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "academic_year",
+   "fieldtype": "Link",
+   "label": "Academic Year",
+   "mandatory": 1,
+   "options": "Academic Year",
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "month",
+   "fieldtype": "Select",
+   "label": "Month",
+   "mandatory": 1,
+   "options": "January\nFebruary\nMarch\nApril\nMay\nJune\nJuly\nAugust\nSeptember\nOctober\nNovember\nDecember",
+   "wildcard_filter": 0
+  }
+ ],
+ "idx": 2,
+ "is_standard": "Yes",
+ "letter_head": null,
+ "modified": "2026-02-20 10:47:24.545125",
+ "modified_by": "Administrator",
+ "module": "Edvronix App",
+ "name": "Parent Voucher Script Report",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "query": "SELECT DISTINCT\r\n    g.name AS \"Guardian ID\",\r\n    g.guardian_name AS \"Parent Name\",\r\n    g.mobile_number AS \"Mobile\",\r\n    s.name AS \"Student ID\",\r\n    s.first_name AS \"Student Name\",\r\n    pe.program AS \"Program\",\r\n    pe.academic_year AS \"Academic Year\",\r\n    si.name AS \"Invoice ID\",\r\n    si.posting_date AS \"Date\",\r\n    si.due_date AS \"Due Date\",\r\n    /* Simplified Fee Breakdown */\r\n    COALESCE((SELECT SUM(amount) FROM `tabSales Invoice Item` WHERE parent = si.name AND item_name LIKE '%%Tuition%%'), 0) AS \"Tuition Fee\",\r\n    si.grand_total AS \"Total Per Student\",\r\n    si.outstanding_amount AS \"Outstanding\",\r\n    /* Status Logic */\r\n    CASE \r\n        WHEN si.outstanding_amount <= 0 THEN 'Paid'\r\n        WHEN si.outstanding_amount > 0 AND si.due_date < CURDATE() THEN 'Overdue'\r\n        WHEN si.outstanding_amount > 0 AND si.outstanding_amount < si.grand_total THEN 'Partially Paid'\r\n        ELSE 'Unpaid'\r\n    END AS \"Status\"\r\nFROM\r\n    `tabSales Invoice` si\r\nINNER JOIN `tabStudent` s ON si.student = s.name\r\nINNER JOIN `tabStudent Guardian` sg ON s.name = sg.parent\r\nINNER JOIN `tabGuardian` g ON sg.guardian = g.name\r\nLEFT JOIN `tabProgram Enrollment` pe ON pe.name = (\r\n    SELECT name FROM `tabProgram Enrollment` \r\n    WHERE student = s.name \r\n    ORDER BY creation DESC LIMIT 1\r\n)\r\nWHERE\r\n    si.docstatus = 1\r\n    AND sg.relation = 'Father'\r\n    AND (%(guardian)s = \"\" OR %(guardian)s IS NULL OR g.name = %(guardian)s)\r\n    AND (%(academic_year)s = \"\" OR %(academic_year)s IS NULL OR pe.academic_year = %(academic_year)s)\r\n    AND (%(month)s = \"\" OR %(month)s IS NULL OR MONTHNAME(si.posting_date) = %(month)s)\r\nORDER BY\r\n    g.name, s.name;",
+ "ref_doctype": "Sales Invoice",
+ "report_name": "Parent Voucher Script Report",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "Accounts Manager"
+  },
+  {
+   "role": "Accounts User"
+  },
+  {
+   "role": "Student"
+  },
+  {
+   "role": "Employee Self Service"
+  },
+  {
+   "role": "Operation Officer"
+  },
+  {
+   "role": "School Administrator"
+  },
+  {
+   "role": "Accounts & Finance Officer"
+  },
+  {
+   "role": "School Operations Monitor"
+  }
+ ],
+ "timeout": 0
+}
