@@ -12,7 +12,24 @@ def execute(filters=None):
 
     columns = get_columns()
     data = get_data(filters)
-    summary = get_report_summary(data, filters)
+
+    if data:
+        total_amount = sum(flt(d['amount']) for d in data)
+        total_paid = sum(flt(d['paid']) for d in data)
+        total_outstanding = sum(flt(d['outstanding']) for d in data)
+        data.append({
+            "invoice": "",
+            "student": "",
+            "student_name": "<b>TOTAL</b>",
+            "item": "",
+            "amount": total_amount,
+            "paid": total_paid,
+            "outstanding": total_outstanding,
+            "payment_date": "",
+            "posting_date": "",
+        })
+
+    summary = get_report_summary(data[:-1] if data else [], filters)
 
     return columns, data, None, None, summary
 

@@ -1,4 +1,4 @@
-// # Copyright (c) 2026, Dynovative and contributors
+// # Copyright (c) 2026, Solvronix and contributors
 // # For license information, please see license.txt
 
 frappe.query_reports["Student Fee Voucher in Bulk With Bank"] = {

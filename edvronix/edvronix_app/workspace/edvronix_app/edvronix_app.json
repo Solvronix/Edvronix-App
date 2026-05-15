@@ -1,7 +1,7 @@
 {
  "app": "edvronix",
  "charts": [],
- "content": "[{\"id\":\"edv_sp1\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"edv_h1\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Your Shortcuts</b></span>\",\"col\":12}},{\"id\":\"edv_sc1\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sales Invoice\",\"col\":3}},{\"id\":\"edv_sc3\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Student\",\"col\":3}},{\"id\":\"edv_sp2\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"edv_h2\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Reports</b></span>\",\"col\":12}},{\"id\":\"edv_c1\",\"type\":\"card\",\"data\":{\"card_name\":\"Fee Reports\",\"col\":4}},{\"id\":\"edv_c2\",\"type\":\"card\",\"data\":{\"card_name\":\"Student Reports\",\"col\":4}},{\"id\":\"edv_c3\",\"type\":\"card\",\"data\":{\"card_name\":\"Admission and Guardian Reports\",\"col\":4}}]",
+ "content": "[{\"id\":\"edv_h1\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Your Shortcuts</b></span>\",\"col\":12}},{\"id\":\"edv_sc3\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Student\",\"col\":3}},{\"id\":\"edv_sc1\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sales Invoice\",\"col\":3}},{\"id\":\"nY6yRCcvUi\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Instructor\",\"col\":3}},{\"id\":\"edv_sp2\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"edv_h2\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Reports</b></span>\",\"col\":12}},{\"id\":\"edv_c1\",\"type\":\"card\",\"data\":{\"card_name\":\"Fee Reports\",\"col\":4}},{\"id\":\"edv_c2\",\"type\":\"card\",\"data\":{\"card_name\":\"Student Reports\",\"col\":4}},{\"id\":\"edv_c3\",\"type\":\"card\",\"data\":{\"card_name\":\"Admission and Guardian Reports\",\"col\":4}}]",
  "creation": "2026-05-14 00:00:00",
  "custom_blocks": [],
  "docstatus": 0,
@@ -9,7 +9,7 @@
  "for_user": "",
  "hide_custom": 0,
  "icon": "education",
- "idx": 0,
+ "idx": 1,
  "is_hidden": 0,
  "label": "Edvronix App",
  "links": [
@@ -144,7 +144,7 @@
    "type": "Link"
   }
  ],
- "modified": "2026-05-14 15:37:03.399420",
+ "modified": "2026-05-14 16:59:48.947160",
  "modified_by": "Administrator",
  "module": "Edvronix App",
  "name": "Edvronix App",
@@ -157,6 +157,14 @@
  "roles": [],
  "sequence_id": 20.0,
  "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Instructor",
+   "link_to": "Instructor",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
   {
    "color": "Grey",
    "format": "",
