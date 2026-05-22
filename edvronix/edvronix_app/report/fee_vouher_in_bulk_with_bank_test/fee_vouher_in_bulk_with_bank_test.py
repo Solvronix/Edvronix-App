@@ -1,4 +1,4 @@
-# Copyright (c) 2026, Solvronix and contributors
+# Copyright (c) 2026, Dynovative and contributors
 # For license information, please see license.txt
 
 import frappe
@@ -39,8 +39,13 @@ def execute(filters=None):
             pe.academic_year AS academic_year,
             pe.student_category AS student_category,
             si.name AS invoice_id,
-            (SELECT GROUP_CONCAT(CONCAT(item_name, '|', CAST(ROUND(amount, 0) AS CHAR)) SEPARATOR '::')  
-            FROM `tabSales Invoice Item` 
+            (SELECT GROUP_CONCAT(CONCAT(item_name, '|', CAST(ROUND(amount, 0) AS CHAR))
+             ORDER BY IF(FIELD(item_code, 'Annual Fund', 'Monthly Tuition Fee', 'Admission Fee', 'Exam Fee') = 0,
+                         999,
+                         FIELD(item_code, 'Annual Fund', 'Monthly Tuition Fee', 'Admission Fee', 'Exam Fee')),
+                      idx
+             SEPARATOR '::')
+            FROM `tabSales Invoice Item`
             WHERE parent = si.name) AS invoice_items,
             si.due_date AS due_date,
             COALESCE(si.grand_total, 0) AS total_per_student,

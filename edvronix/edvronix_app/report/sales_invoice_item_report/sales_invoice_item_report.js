@@ -1,4 +1,4 @@
-// Copyright (c) 2026, Solvronix and contributors
+// Copyright (c) 2026, Dynovative and contributors
 // For license information, please see license.txt
 
 frappe.query_reports["Sales Invoice Item Report"] = {
@@ -42,6 +42,19 @@ frappe.query_reports["Sales Invoice Item Report"] = {
         onchange: function() {
             if (frappe.query_report.get_filter_value('paid_only'))
                 frappe.query_report.set_filter_value('unpaid_only', 0);
+        }
+    },
+    {
+        "fieldname": "no_annual_fund",
+        "label": "Students Missing Annual Fund",
+        "fieldtype": "Check",
+        "default": 0,
+        onchange: function() {
+            if (frappe.query_report.get_filter_value('no_annual_fund')) {
+                frappe.query_report.set_filter_value('unpaid_only', 0);
+                frappe.query_report.set_filter_value('paid_only', 0);
+                frappe.query_report.set_filter_value('item', '');
+            }
         }
     }
 ]
