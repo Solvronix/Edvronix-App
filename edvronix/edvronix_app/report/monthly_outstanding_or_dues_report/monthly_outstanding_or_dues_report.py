@@ -136,7 +136,11 @@ def execute(filters=None):
     # Arrears = outstanding on any invoice that is NOT the selected month (same logic as fee_vouher_in_bulk_with_bank)
     arrears = 0.0
     if month:
-        arrears_conditions = "si.docstatus = 1 AND si.outstanding_amount > 0 AND MONTHNAME(si.due_date) != %(month_display)s"
+        arrears_conditions = """si.docstatus = 1 AND si.outstanding_amount > 0
+            AND si.due_date < (
+                SELECT MIN(si_ref.due_date) FROM `tabSales Invoice` si_ref
+                WHERE si_ref.docstatus = 1 AND MONTHNAME(si_ref.due_date) = %(month_display)s
+            )"""
         arrears_params = {"month_display": month_display}
 
         if academic_year or program:
@@ -162,13 +166,16 @@ def execute(filters=None):
 
     target = total_fee_sum + arrears
 
+    if data and not data[-1].get("student"):
+        data[-1]["outstanding"] = target - total_paid_sum
+
     report_summary = [
         {"value": len(students_in_report), "label": "Total Students", "datatype": "Int", "indicator": "Blue"},
         {"value": total_fee_sum, "label": "Total Fee", "datatype": "Currency", "indicator": "Blue"},
         {"value": arrears, "label": "Arrears", "datatype": "Currency", "indicator": "Orange"},
-        {"value": target, "label": "Target (Fee + Arrears)", "datatype": "Currency", "indicator": "Purple"},
+        {"value": target, "label": "Target (Current Fee + Arrears)", "datatype": "Currency", "indicator": "Purple"},
         {"value": total_paid_sum, "label": "Total Paid", "datatype": "Currency", "indicator": "Green"},
-        {"value": total_outstanding_sum, "label": "Outstanding", "datatype": "Currency", "indicator": "Red"},
+        {"value": target - total_paid_sum, "label": "Outstanding (Target - Total Paid)", "datatype": "Currency", "indicator": "Red"},
     ]
 
     return columns, data, None, None, report_summary
@@ -186,7 +193,7 @@ def get_columns():
         {"label": "Outstanding", "fieldname": "outstanding", "fieldtype": "Currency", "width": 120},
         {"label": "Status", "fieldname": "status", "fieldtype": "Data", "width": 100},
         {"label": "Due Date", "fieldname": "due_date", "fieldtype": "Date", "width": 110},
-        {"label": "Payment Date", "fieldname": "payment_date", "fieldtype": "Date", "width": 120},
+        {"label": "Receiving Date", "fieldname": "payment_date", "fieldtype": "Date", "width": 120},
         {"label": "Program", "fieldname": "program", "fieldtype": "Link", "options": "Program", "width": 120},
         {"label": "Section", "fieldname": "student_category", "fieldtype": "Link", "options": "Student Category", "width": 120},
         {"label": "Academic Year", "fieldname": "academic_year", "fieldtype": "Data", "width": 110},

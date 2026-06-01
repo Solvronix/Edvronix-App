@@ -1,0 +1,20 @@
+[
+ {
+  "doctype": "Edvronix Settings",
+  "name": "Edvronix Settings",
+  "late_fee_after_10": 100,
+  "late_fee_after_20": 200,
+  "item_abbreviations": [
+   {"item_name": "Annual Fund", "abbreviation": "An"},
+   {"item_name": "Monthly Tuition Fee", "abbreviation": "Mon"},
+   {"item_name": "Admission Fee", "abbreviation": "Adm"},
+   {"item_name": "Exam Fee", "abbreviation": "Exam"},
+   {"item_name": "Activity Fee", "abbreviation": "Act"},
+   {"item_name": "Extra Charges", "abbreviation": "Ext"},
+   {"item_name": "Late Fee", "abbreviation": "Fine"},
+   {"item_name": "Scholership", "abbreviation": "Scho"},
+   {"item_name": "Sibling Discount", "abbreviation": "Sib"},
+   {"item_name": "Transport Fee", "abbreviation": "Trans"}
+  ]
+ }
+]

@@ -1,6 +1,3 @@
-// # Copyright (c) 2026, Solvronix and contributors
-// # For license information, please see license.txt
-
 frappe.query_reports["Fee Vouher in Bulk with Bank"] = {
     filters: [
         {
@@ -264,11 +261,16 @@ function generate_print_html(data, filters) {
 
         let total_val = current_val + arrear_val;
 
+        // Scale down content when a parent has many students so nothing overflows
+        // Base capacity ~4 rows at zoom 1.0; reduce 6% per extra row, min 0.55
+        let rowCount = parent.rows.length;
+        let zoom = rowCount <= 4 ? 1 : Math.max(0.55, 1 - (rowCount - 4) * 0.06);
+
         html += `<div class="page-wrapper">`;
 
         ["Bank Copy", "Office Copy", "Parent Copy"].forEach((copy_name) => {
             html += `
-            <div class="voucher-wrapper">
+            <div class="voucher-wrapper" style="zoom: ${zoom};">
                 <div class="copy-tag">${copy_name}</div>
                 <div class="header">
                     <div style="display:flex; align-items:center;">
@@ -291,7 +293,7 @@ function generate_print_html(data, filters) {
                     <div>
                         <div style="font-size: 8px; color: #1a3a5f; font-weight: bold; text-transform: uppercase;">Bank Account Details</div>
                         <div style="font-size: 11px; font-weight: 700; color: #1a3a5f;">Faysal Bank Limited (IBB Sheikhupura)</div>
-                        <div style="font-size: 10px; color: #2d3748;"><b>A/C Title:</b> Edvronix School System</div>
+                        <div style="font-size: 10px; color: #2d3748;"><b>A/C Title:</b> Al Faisal School System</div>
                     </div>
                     <div style="text-align: right;">
                         <div style="font-size: 8px; color: #1a3a5f; font-weight: bold; text-transform: uppercase;">IBAN</div>
@@ -336,6 +338,31 @@ function generate_print_html(data, filters) {
                     items_html = "<div style='font-size:8px; color:red;'>No items found</div>";
                 }
 
+                // Build arrears breakdown HTML
+                const ITEM_ABBR = {
+                    "Annual Fund": "An",
+                    "Monthly Tuition Fee": "Mon",
+                    "Admission Fee": "Adm",
+                    "Exam Fee": "Exam",
+                    "Activity Fee": "Act",
+                    "Extra Charges": "Ext",
+                    "Late Fee": "Fine",
+                    "Scholership": "Scho",
+                    "Sibling Discount": "Sib",
+                    "Transport Fee": "Trans",
+                };
+                let arrears_html = "";
+                if (r.arrears_detail) {
+                    arrears_html = r.arrears_detail.split('::').map(item_group => {
+                        let [name, amt, mon] = item_group.split('|');
+                        let label = (ITEM_ABBR[name] || name) + (mon ? ` (${mon})` : '');
+                        return `<div style="display:flex; justify-content:space-between; font-size:8px; color:#c53030;">
+                        <span>${label}</span>
+                        <span style="font-weight:bold; margin-left:4px;">${flt(amt).toLocaleString()}</span>
+                    </div>`;
+                    }).join('');
+                }
+
                 html += `
     <tr>
         <td style="vertical-align: top;">
@@ -353,8 +380,8 @@ function generate_print_html(data, filters) {
             ${getAmountDisplay(r)}
         </td>
 
-        <td style="text-align:right; font-weight:700; vertical-align: top; font-size: 10px; color:#c53030;">
-            ${format_currency(r.arrears || 0, "")}
+        <td style="vertical-align: top; font-weight:700; font-size: 10px; color:#c53030;">
+            ${arrears_html || (r.arrears ? `<span style="float:right;">${format_currency(r.arrears, "")}</span>` : '')}
         </td>
     </tr>`;
             });
@@ -367,9 +394,9 @@ function generate_print_html(data, filters) {
                 <div class="footer-content">
                     <div class="footer-grid">
                         <div class="policy-section">
-                            <div style="color:#c53030; font-weight:bold; margin-bottom:4px;">Fine Policy</div>
-                            • Fine (11th-20th): PKR 100/-<br>
-                            • Fine (After 20th): PKR 200/-
+                            <div style="color:#c53030; font-weight:bold; margin-bottom:4px;">Late Payment Policy</div>
+                            • After 10th date charges will be PKR 100/-<br>
+                            • After 20th date charges will be PKR 200/-
                         </div>
                         <div style="flex:1;">
                             <div class="amount-table">
@@ -378,6 +405,8 @@ function generate_print_html(data, filters) {
                                 <div class="amount-total">
                                     <div style="display:flex; justify-content:space-between;"><span>TOTAL</span> <span>${format_currency(total_val, "")}</span></div>
                                 </div>
+                                <div class="amount-row" style="font-size:9px; color:#555;"><span>After 10th Date</span> <span>${format_currency(total_val + 100, "")}</span></div>
+                                <div class="amount-row" style="font-size:9px; color:#555;"><span>After 20th Date</span> <span>${format_currency(total_val + 300, "")}</span></div>
                             </div>
                         </div>
                     </div>

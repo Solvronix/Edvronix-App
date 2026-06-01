@@ -1,5 +1,4 @@
-# Copyright (c) 2026, Dynovative and contributors
-# For license information, please see license.txt
+
 
 import frappe
 from frappe.utils import flt
@@ -62,11 +61,67 @@ def execute(filters=None):
             (
                 SELECT COALESCE(SUM(si2.outstanding_amount), 0)
                 FROM `tabSales Invoice` si2
-                WHERE 
+                WHERE
                     si2.student = s.name
                     AND si2.docstatus = 1
                     AND si2.name != si.name
+                    AND (%(month)s = '' OR si2.due_date < (
+                        SELECT MIN(si_ref.due_date) FROM `tabSales Invoice` si_ref
+                        WHERE si_ref.docstatus = 1 AND MONTHNAME(si_ref.due_date) = %(month)s
+                    ))
             ) AS arrears,
+
+            (
+                SELECT GROUP_CONCAT(
+                    CONCAT(
+                        sii.item_name, '|',
+                        CAST(ROUND(
+                            sii.amount - GREATEST(0, LEAST(sii.amount,
+                                (si2.grand_total - si2.outstanding_amount) - COALESCE((
+                                    SELECT SUM(sp.amount)
+                                    FROM `tabSales Invoice Item` sp
+                                    WHERE sp.parent = sii.parent
+                                    AND (
+                                        IF(FIELD(sp.item_code,'Annual Fund','Monthly Tuition Fee','Admission Fee','Exam Fee')=0,999,
+                                           FIELD(sp.item_code,'Annual Fund','Monthly Tuition Fee','Admission Fee','Exam Fee'))*1000 + sp.idx
+                                        <
+                                        IF(FIELD(sii.item_code,'Annual Fund','Monthly Tuition Fee','Admission Fee','Exam Fee')=0,999,
+                                           FIELD(sii.item_code,'Annual Fund','Monthly Tuition Fee','Admission Fee','Exam Fee'))*1000 + sii.idx
+                                    )
+                                ), 0)
+                            )), 0) AS CHAR),
+                        '|', COALESCE(DATE_FORMAT(si2.due_date, '%%b'), '')
+                    )
+                    ORDER BY IF(FIELD(sii.item_code, 'Annual Fund', 'Monthly Tuition Fee', 'Admission Fee', 'Exam Fee') = 0,
+                               999,
+                               FIELD(sii.item_code, 'Annual Fund', 'Monthly Tuition Fee', 'Admission Fee', 'Exam Fee')),
+                             sii.idx
+                    SEPARATOR '::'
+                )
+                FROM `tabSales Invoice` si2
+                INNER JOIN `tabSales Invoice Item` sii ON sii.parent = si2.name
+                WHERE si2.student = s.name
+                    AND si2.docstatus = 1
+                    AND si2.name != si.name
+                    AND si2.outstanding_amount > 0
+                    AND (%(month)s = '' OR si2.due_date < (
+                        SELECT MIN(si_ref.due_date) FROM `tabSales Invoice` si_ref
+                        WHERE si_ref.docstatus = 1 AND MONTHNAME(si_ref.due_date) = %(month)s
+                    ))
+                    AND (si2.grand_total - si2.outstanding_amount) < (
+                        SELECT COALESCE(SUM(sp.amount), 0)
+                        FROM `tabSales Invoice Item` sp
+                        WHERE sp.parent = sii.parent
+                        AND (
+                            IF(FIELD(sp.item_code,'Annual Fund','Monthly Tuition Fee','Admission Fee','Exam Fee')=0,999,
+                               FIELD(sp.item_code,'Annual Fund','Monthly Tuition Fee','Admission Fee','Exam Fee'))*1000 + sp.idx
+                            <=
+                            IF(FIELD(sii.item_code,'Annual Fund','Monthly Tuition Fee','Admission Fee','Exam Fee')=0,999,
+                               FIELD(sii.item_code,'Annual Fund','Monthly Tuition Fee','Admission Fee','Exam Fee'))*1000 + sii.idx
+                        )
+                    )
+            ) AS arrears_detail,
+
             COALESCE(si.status, 'No Invoice') AS status
         FROM `tabGuardian` g
         INNER JOIN `tabStudent Guardian` sg ON g.name = sg.guardian
@@ -95,7 +150,11 @@ def execute(filters=None):
     # Arrears = outstanding on invoices NOT in the selected month (same students)
     arrears = 0.0
     if month:
-        arrears_conditions = "si.docstatus = 1 AND si.outstanding_amount > 0 AND MONTHNAME(si.due_date) != %(month)s"
+        arrears_conditions = """si.docstatus = 1 AND si.outstanding_amount > 0
+            AND si.due_date < (
+                SELECT MIN(si_ref.due_date) FROM `tabSales Invoice` si_ref
+                WHERE si_ref.docstatus = 1 AND MONTHNAME(si_ref.due_date) = %(month)s
+            )"""
         arrears_params = {"month": month}
 
         if academic_year:
@@ -144,7 +203,7 @@ def get_columns():
         {"label": "Invoice ID", "fieldname": "invoice_id", "fieldtype": "Link", "options": "Sales Invoice", "width": 120},
         {"label": "Due Date", "fieldname": "due_date", "fieldtype": "Date", "width": 100},
         {"label": "Paid Amount", "fieldname": "paid_amount", "fieldtype": "Currency", "width": 110},
-        {"label": "Payment Date", "fieldname": "payment_date", "fieldtype": "Date", "width": 110},
+        {"label": "Receiving Date", "fieldname": "payment_date", "fieldtype": "Date", "width": 110},
         {"label": "Outstanding", "fieldname": "outstanding", "fieldtype": "Currency", "width": 110},
         {"label": "Arrears", "fieldname": "arrears", "fieldtype": "Currency", "width": 120},
         {"label": "Status", "fieldname": "status", "fieldtype": "Data", "width": 100},

@@ -98,7 +98,7 @@ def override_invoice_rates(doc, method=None):
             "student": doc.student,
             "docstatus": 1
         },
-        fields=["tuition_fee"],
+        fields=["custom_tuition_fee"],
         order_by="creation desc",
         limit=1
     )
@@ -106,7 +106,7 @@ def override_invoice_rates(doc, method=None):
     if not enrollment:
         return
 
-    tuition_fee = enrollment[0].tuition_fee
+    tuition_fee = enrollment[0].custom_tuition_fee
 
     # 3. Update only tuition items BEFORE they are saved
     for item in doc.items:

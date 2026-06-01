@@ -296,7 +296,7 @@ function generate_print_html(data, filters) {
                     <div>
                         <div style="font-size: 8px; color: #1a3a5f; font-weight: bold; text-transform: uppercase;">Bank Account Details</div>
                         <div style="font-size: 11px; font-weight: 700; color: #1a3a5f;">Faysal Bank Limited (IBB Sheikhupura)</div>
-                        <div style="font-size: 10px; color: #2d3748;"><b>A/C Title:</b> Edvronix School System</div>
+                        <div style="font-size: 10px; color: #2d3748;"><b>A/C Title:</b> Al Faisal School System</div>
                     </div>
                     <div style="text-align: right;">
                         <div style="font-size: 8px; color: #1a3a5f; font-weight: bold; text-transform: uppercase;">IBAN</div>
@@ -341,6 +341,31 @@ function generate_print_html(data, filters) {
                     items_html = "<div style='font-size:8px; color:red;'>No items found</div>";
                 }
 
+                // Build arrears breakdown HTML
+                const ITEM_ABBR = {
+                    "Annual Fund": "An",
+                    "Monthly Tuition Fee": "Mon",
+                    "Admission Fee": "Adm",
+                    "Exam Fee": "Exam",
+                    "Activity Fee": "Act",
+                    "Extra Charges": "Ext",
+                    "Late Fee": "Fine",
+                    "Scholership": "Scho",
+                    "Sibling Discount": "Sib",
+                    "Transport Fee": "Trans",
+                };
+                let arrears_html = "";
+                if (r.arrears_detail) {
+                    arrears_html = r.arrears_detail.split('::').map(item_group => {
+                        let [name, amt, mon] = item_group.split('|');
+                        let label = (ITEM_ABBR[name] || name) + (mon ? ` (${mon})` : '');
+                        return `<div style="display:flex; justify-content:space-between; font-size:8px; color:#c53030;">
+                        <span>${label}</span>
+                        <span style="font-weight:bold; margin-left:4px;">${flt(amt).toLocaleString()}</span>
+                    </div>`;
+                    }).join('');
+                }
+
                 html += `
     <tr>
         <td style="vertical-align: top;">
@@ -358,8 +383,8 @@ function generate_print_html(data, filters) {
             ${getAmountDisplay(r)}
         </td>
 
-        <td style="text-align:right; font-weight:700; vertical-align: top; font-size: 10px; color:#c53030;">
-            ${format_currency(r.arrears || 0, "")}
+        <td style="vertical-align: top; font-weight:700; font-size: 10px; color:#c53030;">
+            ${arrears_html || (r.arrears ? `<span style="float:right;">${format_currency(r.arrears, "")}</span>` : '')}
         </td>
     </tr>`;
             });

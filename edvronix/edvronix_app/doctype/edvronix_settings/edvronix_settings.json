@@ -1,0 +1,215 @@
+{
+ "actions": [],
+ "creation": "2026-05-22 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_school_info",
+  "school_name",
+  "school_logo",
+  "watermark_text",
+  "address",
+  "column_break_school",
+  "phone",
+  "mobile",
+  "email",
+  "website",
+  "section_bank_details",
+  "bank_name",
+  "account_title",
+  "account_number",
+  "iban",
+  "column_break_bank",
+  "branch_name",
+  "swift_code",
+  "section_late_fee",
+  "late_fee_policy_text",
+  "column_break_late_fee",
+  "late_fee_after_10",
+  "late_fee_after_20",
+  "section_item_abbr",
+  "item_abbreviations",
+  "section_terms",
+  "terms_templates"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_school_info",
+   "fieldtype": "Section Break",
+   "label": "School Information"
+  },
+  {
+   "fieldname": "school_name",
+   "fieldtype": "Data",
+   "label": "School Name"
+  },
+  {
+   "fieldname": "school_logo",
+   "fieldtype": "Attach Image",
+   "label": "School Logo"
+  },
+  {
+   "fieldname": "watermark_text",
+   "fieldtype": "Data",
+   "label": "Watermark Text",
+   "description": "Short text shown as watermark on vouchers. Defaults to School Name if empty."
+  },
+  {
+   "fieldname": "address",
+   "fieldtype": "Small Text",
+   "label": "Address"
+  },
+  {
+   "fieldname": "column_break_school",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "phone",
+   "fieldtype": "Data",
+   "label": "Phone"
+  },
+  {
+   "fieldname": "mobile",
+   "fieldtype": "Data",
+   "label": "Mobile"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email",
+   "options": "Email"
+  },
+  {
+   "fieldname": "website",
+   "fieldtype": "Data",
+   "label": "Website"
+  },
+  {
+   "fieldname": "section_bank_details",
+   "fieldtype": "Section Break",
+   "label": "Bank Details"
+  },
+  {
+   "fieldname": "bank_name",
+   "fieldtype": "Data",
+   "label": "Bank Name"
+  },
+  {
+   "fieldname": "account_title",
+   "fieldtype": "Data",
+   "label": "Account Title"
+  },
+  {
+   "fieldname": "account_number",
+   "fieldtype": "Data",
+   "label": "Account Number"
+  },
+  {
+   "fieldname": "iban",
+   "fieldtype": "Data",
+   "label": "IBAN"
+  },
+  {
+   "fieldname": "column_break_bank",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "branch_name",
+   "fieldtype": "Data",
+   "label": "Branch Name"
+  },
+  {
+   "fieldname": "swift_code",
+   "fieldtype": "Data",
+   "label": "Swift Code"
+  },
+  {
+   "fieldname": "section_late_fee",
+   "fieldtype": "Section Break",
+   "label": "Late Fee Policy"
+  },
+  {
+   "fieldname": "late_fee_policy_text",
+   "fieldtype": "Small Text",
+   "label": "Late Fee Policy Text",
+   "description": "This text appears on the fee voucher. Use line breaks for multiple points."
+  },
+  {
+   "fieldname": "column_break_late_fee",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "100",
+   "fieldname": "late_fee_after_10",
+   "fieldtype": "Int",
+   "label": "Late Fee After 10th",
+   "description": "Extra amount charged after 10th of month"
+  },
+  {
+   "default": "200",
+   "fieldname": "late_fee_after_20",
+   "fieldtype": "Int",
+   "label": "Late Fee After 20th",
+   "description": "Extra amount charged after 20th of month"
+  },
+  {
+   "fieldname": "section_item_abbr",
+   "fieldtype": "Section Break",
+   "label": "Item Abbreviations"
+  },
+  {
+   "fieldname": "item_abbreviations",
+   "fieldtype": "Table",
+   "label": "Item Abbreviations",
+   "options": "Edvronix Item Abbreviation"
+  },
+  {
+   "fieldname": "section_terms",
+   "fieldtype": "Section Break",
+   "label": "Terms and Conditions"
+  },
+  {
+   "fieldname": "terms_templates",
+   "fieldtype": "Table",
+   "label": "Terms Templates",
+   "options": "Edvronix Terms Template"
+  }
+ ],
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-05-22 00:00:00.000001",
+ "modified_by": "Administrator",
+ "module": "Edvronix App",
+ "name": "Edvronix Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 0
+  },
+  {
+   "role": "School Administrator",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 0
+  },
+  {
+   "role": "Accounts Manager",
+   "read": 1,
+   "write": 0
+  },
+  {
+   "role": "Accounts User",
+   "read": 1,
+   "write": 0
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

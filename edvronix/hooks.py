@@ -174,6 +174,9 @@ fixtures = [
                 "Sales Invoice-student_info_section"
             ]]
         ]
+    },
+    {
+        "dt": "Edvronix Settings"
     }
 ]
 
