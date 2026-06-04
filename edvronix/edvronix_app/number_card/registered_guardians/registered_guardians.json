@@ -1,0 +1,16 @@
+{
+ "color": "#06b6d4",
+ "creation": "2026-06-01 00:00:00.000000",
+ "doctype": "Number Card",
+ "document_type": "Guardian",
+ "filters_json": "[]",
+ "function": "Count",
+ "is_public": 1,
+ "is_standard": 1,
+ "label": "Registered Guardians",
+ "modified": "2026-06-01 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Edvronix App",
+ "name": "Registered Guardians",
+ "owner": "Administrator"
+}

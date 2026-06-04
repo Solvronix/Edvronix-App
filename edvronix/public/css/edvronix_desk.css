@@ -1,0 +1,90 @@
+/* Edvronix module sidebar accent */
+[data-module-name="Edvronix App"] .sidebar-item {
+  border-left: 3px solid #2563eb;
+}
+
+/* Number cards styling */
+.edvronix-kpi-card {
+  border-radius: 12px;
+  border-left: 4px solid var(--card-color);
+  padding: 20px;
+  background: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.edvronix-kpi-value {
+  font-size: 28px;
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 4px;
+}
+
+.edvronix-kpi-label {
+  font-size: 13px;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Quick actions grid */
+.edvronix-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.edvronix-action-btn {
+  padding: 16px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.edvronix-action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Reports sections */
+.edvronix-report-section {
+  margin-bottom: 24px;
+}
+
+.edvronix-report-section h4 {
+  font-size: 13px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+/* Dashboard welcome banner */
+.edvronix-welcome {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  color: white;
+  padding: 24px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.edvronix-welcome h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 4px;
+  color: white;
+}
+
+.edvronix-welcome p {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+}

@@ -59,6 +59,7 @@ def get_columns():
         {"label": "Amount", "fieldname": "amount", "fieldtype": "Currency", "width": 130},
         {"label": "Paid", "fieldname": "paid", "fieldtype": "Currency", "width": 130},
         {"label": "Outstanding", "fieldname": "outstanding", "fieldtype": "Currency", "width": 130},
+        {"label": "Invoice Status", "fieldname": "invoice_status", "fieldtype": "Data", "width": 120},
         {"label": "Payment Date", "fieldname": "payment_date", "fieldtype": "Date", "width": 120},
         {"label": "Posting Date", "fieldname": "posting_date", "fieldtype": "Date", "width": 130},
     ]
@@ -84,6 +85,11 @@ def get_data(filters):
             si_item.amount AS amount,
             si_item.idx AS item_idx,
             (si.grand_total - si.outstanding_amount) AS invoice_paid,
+            CASE
+                WHEN si.outstanding_amount = 0 THEN 'Fully Paid'
+                WHEN si.outstanding_amount = si.grand_total THEN 'Not Paid'
+                ELSE 'Partial Paid'
+            END AS invoice_status,
             (SELECT MAX(pe.posting_date)
              FROM `tabPayment Entry` pe
              INNER JOIN `tabPayment Entry Reference` per ON pe.name = per.parent
@@ -142,6 +148,7 @@ def apply_priority_allocation(raw_data):
                 'amount': item_amount,
                 'paid': item_paid,
                 'outstanding': item_amount - item_paid,
+                'invoice_status': row.get('invoice_status') or '',
                 'payment_date': row['payment_date'],
                 'posting_date': row['posting_date'],
             })
@@ -163,9 +170,8 @@ def build_conditions(filters):
     if filters.get("paid_only") and filters.get("unpaid_only"):
         conditions.append("1 = 0")
     elif filters.get("unpaid_only"):
+        # Safe SQL optimisation: fully paid invoices can never have unpaid items
         conditions.append("si.outstanding_amount > 0")
-    elif filters.get("paid_only"):
-        conditions.append("si.outstanding_amount = 0")
 
     if filters.get("academic_year"):
         conditions.append("""
@@ -251,6 +257,10 @@ def get_report_summary(data, filters):
 
     student_count = len({d['student'] for d in data if d.get('student')})
 
+    fully_paid_students = len({d['student'] for d in data if d.get('student') and d.get('invoice_status') == 'Fully Paid'})
+    partial_paid_students = len({d['student'] for d in data if d.get('student') and d.get('invoice_status') == 'Partial Paid'})
+    not_paid_students = len({d['student'] for d in data if d.get('student') and d.get('invoice_status') == 'Not Paid'})
+
     total_amount = sum(flt(d['amount']) for d in data)
     total_paid = sum(flt(d['paid']) for d in data)
     total_outstanding = sum(flt(d['outstanding']) for d in data)
@@ -262,6 +272,9 @@ def get_report_summary(data, filters):
 
     return [
         {"value": student_count, "label": "Total Students", "datatype": "Int", "indicator": "Blue"},
+        {"value": fully_paid_students, "label": "Fully Paid", "datatype": "Int", "indicator": "Green"},
+        {"value": partial_paid_students, "label": "Partial Paid", "datatype": "Int", "indicator": "Orange"},
+        {"value": not_paid_students, "label": "Not Paid", "datatype": "Int", "indicator": "Red"},
         {"value": total_amount, "label": selected_item_label, "datatype": "Currency", "indicator": "Blue"},
         {"value": total_paid, "label": "Total Paid", "datatype": "Currency", "indicator": "Green"},
         {"value": total_outstanding, "label": "Total Pending", "datatype": "Currency", "indicator": "Red"},

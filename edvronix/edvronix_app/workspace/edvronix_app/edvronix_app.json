@@ -1,7 +1,11 @@
 {
  "app": "edvronix",
- "charts": [],
- "content": "[{\"id\":\"edv_h1\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Your Shortcuts</b></span>\",\"col\":12}},{\"id\":\"edv_sc3\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Student\",\"col\":3}},{\"id\":\"edv_sc1\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sales Invoice\",\"col\":3}},{\"id\":\"nY6yRCcvUi\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Instructor\",\"col\":3}},{\"id\":\"6Tv8IoctZj\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Edvronix Settings\",\"col\":3}},{\"id\":\"edv_sp2\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"edv_h2\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Reports</b></span>\",\"col\":12}},{\"id\":\"edv_c1\",\"type\":\"card\",\"data\":{\"card_name\":\"Fee Reports\",\"col\":4}},{\"id\":\"edv_c2\",\"type\":\"card\",\"data\":{\"card_name\":\"Student Reports\",\"col\":4}},{\"id\":\"edv_c3\",\"type\":\"card\",\"data\":{\"card_name\":\"Admission and Guardian Reports\",\"col\":4}}]",
+ "charts": [
+  {"chart_name": "Monthly Fee Collection", "width": "Full"},
+  {"chart_name": "Fee Collection Status", "width": "Half"},
+  {"chart_name": "Students by Program", "width": "Half"}
+ ],
+ "content": "[{\"id\":\"h_quick\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Quick Actions</b></span>\",\"col\":12}},{\"id\":\"sc_student\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Student\",\"col\":2}},{\"id\":\"sc_invoice\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sales Invoice\",\"col\":2}},{\"id\":\"sc_voucher\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Print Bulk Voucher\",\"col\":2}},{\"id\":\"sc_attend\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Student Attendance\",\"col\":2}},{\"id\":\"sc_settings\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Edvronix Settings\",\"col\":2}},{\"id\":\"sc_guardian\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Guardian\",\"col\":2}},{\"id\":\"sp1\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"h_metrics\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Key Metrics</b></span>\",\"col\":12}},{\"id\":\"nc_students\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Students\",\"col\":4}},{\"id\":\"nc_fee\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Fee Collected This Month\",\"col\":4}},{\"id\":\"nc_outstanding\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Outstanding Fees\",\"col\":4}},{\"id\":\"nc_staff\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Staff\",\"col\":4}},{\"id\":\"nc_today\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Present Today\",\"col\":4}},{\"id\":\"nc_guardian\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Registered Guardians\",\"col\":4}},{\"id\":\"sp2\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"h_analytics\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Analytics</b></span>\",\"col\":12}},{\"id\":\"ch_monthly\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Monthly Fee Collection\",\"col\":12}},{\"id\":\"ch_status\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Fee Collection Status\",\"col\":6}},{\"id\":\"ch_program\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Students by Program\",\"col\":6}},{\"id\":\"sp3\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"h_reports\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Reports</b></span>\",\"col\":12}},{\"id\":\"c_fee\",\"type\":\"card\",\"data\":{\"card_name\":\"Fee Reports\",\"col\":4}},{\"id\":\"c_student\",\"type\":\"card\",\"data\":{\"card_name\":\"Student Reports\",\"col\":4}},{\"id\":\"c_admission\",\"type\":\"card\",\"data\":{\"card_name\":\"Admission and Guardian Reports\",\"col\":4}}]",
  "creation": "2026-05-14 00:00:00",
  "custom_blocks": [],
  "docstatus": 0,
@@ -144,11 +148,18 @@
    "type": "Link"
   }
  ],
- "modified": "2026-05-22 16:12:02.457802",
+ "modified": "2026-06-01 00:00:00.000000",
  "modified_by": "Administrator",
  "module": "Edvronix App",
  "name": "Edvronix App",
- "number_cards": [],
+ "number_cards": [
+  {"number_card_name": "Total Students"},
+  {"number_card_name": "Fee Collected This Month"},
+  {"number_card_name": "Outstanding Fees"},
+  {"number_card_name": "Total Staff"},
+  {"number_card_name": "Present Today"},
+  {"number_card_name": "Registered Guardians"}
+ ],
  "owner": "Administrator",
  "parent_page": "",
  "public": 1,
@@ -158,22 +169,17 @@
  "sequence_id": 20.0,
  "shortcuts": [
   {
-   "color": "Grey",
+   "color": "Blue",
    "doc_view": "List",
-   "label": "Instructor",
-   "link_to": "Instructor",
-   "stats_filter": "[]",
+   "format": "",
+   "label": "Student",
+   "link_to": "Student",
+   "stats_filter": "",
    "type": "DocType"
   },
   {
-   "color": "Grey",
+   "color": "Green",
    "doc_view": "List",
-   "label": "Edvronix Settings",
-   "link_to": "Edvronix Settings",
-   "type": "DocType"
-  },
-  {
-   "color": "Grey",
    "format": "",
    "label": "Sales Invoice",
    "link_to": "Sales Invoice",
@@ -181,10 +187,32 @@
    "type": "DocType"
   },
   {
-   "color": "Grey",
+   "color": "Yellow",
+   "label": "Print Bulk Voucher",
+   "type": "URL",
+   "url": "/app/query-report/Fee Vouher in Bulk with Bank"
+  },
+  {
+   "color": "Purple",
+   "doc_view": "List",
    "format": "",
-   "label": "Student",
-   "link_to": "Student",
+   "label": "Student Attendance",
+   "link_to": "Student Attendance",
+   "stats_filter": "",
+   "type": "DocType"
+  },
+  {
+   "color": "Cyan",
+   "label": "Edvronix Settings",
+   "link_to": "Edvronix Settings",
+   "type": "DocType"
+  },
+  {
+   "color": "Red",
+   "doc_view": "List",
+   "format": "",
+   "label": "Guardian",
+   "link_to": "Guardian",
    "stats_filter": "",
    "type": "DocType"
   }

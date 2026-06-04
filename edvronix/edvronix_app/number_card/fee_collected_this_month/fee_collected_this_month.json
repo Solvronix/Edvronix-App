@@ -1,0 +1,17 @@
+{
+ "aggregate_function_based_on": "grand_total",
+ "color": "#10b981",
+ "creation": "2026-06-01 00:00:00.000000",
+ "doctype": "Number Card",
+ "document_type": "Sales Invoice",
+ "filters_json": "[[\"Sales Invoice\",\"docstatus\",\"=\",1],[\"Sales Invoice\",\"outstanding_amount\",\"=\",0],[\"Sales Invoice\",\"posting_date\",\"Between\",[\"2026-06-01\",\"2026-06-30\"]]]",
+ "function": "Sum",
+ "is_public": 1,
+ "is_standard": 1,
+ "label": "Fee Collected This Month",
+ "modified": "2026-06-01 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Edvronix App",
+ "name": "Fee Collected This Month",
+ "owner": "Administrator"
+}

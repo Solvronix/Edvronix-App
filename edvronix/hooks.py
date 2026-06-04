@@ -25,7 +25,7 @@ app_license = "mit"
 # ------------------
 
 # include js, css files in header of desk.html
-# app_include_css = "/assets/edvronix/css/edvronix.css"
+app_include_css = ["/assets/edvronix/css/edvronix_desk.css"]
 # app_include_js = "/assets/edvronix/js/edvronix.js"
 
 # include js, css files in header of web template
@@ -177,6 +177,22 @@ fixtures = [
     },
     {
         "dt": "Edvronix Settings"
+    },
+    {
+        "dt": "Workspace",
+        "filters": [["name", "=", "Edvronix App"]]
+    },
+    {
+        "dt": "Number Card",
+        "filters": [["module", "=", "Edvronix App"]]
+    },
+    {
+        "dt": "Dashboard Chart",
+        "filters": [["module", "=", "Edvronix App"]]
+    },
+    {
+        "dt": "Dashboard",
+        "filters": [["module", "=", "Edvronix App"]]
     }
 ]
 

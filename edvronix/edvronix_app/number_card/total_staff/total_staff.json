@@ -1,0 +1,16 @@
+{
+ "color": "#8b5cf6",
+ "creation": "2026-06-01 00:00:00.000000",
+ "doctype": "Number Card",
+ "document_type": "Employee",
+ "filters_json": "[[\"Employee\",\"status\",\"=\",\"Active\"]]",
+ "function": "Count",
+ "is_public": 1,
+ "is_standard": 1,
+ "label": "Total Staff",
+ "modified": "2026-06-01 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Edvronix App",
+ "name": "Total Staff",
+ "owner": "Administrator"
+}

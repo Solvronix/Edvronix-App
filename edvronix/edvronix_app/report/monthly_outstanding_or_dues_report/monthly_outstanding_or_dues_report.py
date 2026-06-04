@@ -193,7 +193,7 @@ def get_columns():
         {"label": "Outstanding", "fieldname": "outstanding", "fieldtype": "Currency", "width": 120},
         {"label": "Status", "fieldname": "status", "fieldtype": "Data", "width": 100},
         {"label": "Due Date", "fieldname": "due_date", "fieldtype": "Date", "width": 110},
-        {"label": "Receiving Date", "fieldname": "payment_date", "fieldtype": "Date", "width": 120},
+        {"label": "Payment Date", "fieldname": "payment_date", "fieldtype": "Date", "width": 120},
         {"label": "Program", "fieldname": "program", "fieldtype": "Link", "options": "Program", "width": 120},
         {"label": "Section", "fieldname": "student_category", "fieldtype": "Link", "options": "Student Category", "width": 120},
         {"label": "Academic Year", "fieldname": "academic_year", "fieldtype": "Data", "width": 110},

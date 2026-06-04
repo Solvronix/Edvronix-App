@@ -1,0 +1,16 @@
+{
+ "color": "#f59e0b",
+ "creation": "2026-06-01 00:00:00.000000",
+ "doctype": "Number Card",
+ "document_type": "Student Attendance",
+ "filters_json": "[[\"Student Attendance\",\"date\",\"=\",\"Today\"],[\"Student Attendance\",\"status\",\"=\",\"Present\"]]",
+ "function": "Count",
+ "is_public": 1,
+ "is_standard": 1,
+ "label": "Present Today",
+ "modified": "2026-06-01 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Edvronix App",
+ "name": "Present Today",
+ "owner": "Administrator"
+}
