@@ -1,0 +1,13 @@
+[
+ {
+  "name": "Student Applicant-student_email_id-bold",
+  "doctype": "Property Setter",
+  "doctype_or_field": "DocField",
+  "doc_type": "Student Applicant",
+  "field_name": "student_email_id",
+  "property": "bold",
+  "property_type": "Check",
+  "value": "1",
+  "is_system_generated": 0
+ }
+]

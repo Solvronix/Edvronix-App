@@ -1,0 +1,346 @@
+[
+ {
+  "app": "edvronix",
+  "charts": [
+   {
+    "chart_name": "Monthly Fee Collection",
+    "label": null
+   },
+   {
+    "chart_name": "Fee Collection Status",
+    "label": null
+   },
+   {
+    "chart_name": "Students by Program",
+    "label": null
+   }
+  ],
+  "content": "[{\"id\":\"h_quick\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Quick Actions</b></span>\",\"col\":12}},{\"id\":\"sc_student\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Student\",\"col\":4}},{\"id\":\"sc_invoice\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sales Invoice\",\"col\":4}},{\"id\":\"sc_voucher\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Print Bulk Voucher\",\"col\":4}},{\"id\":\"sc_attend\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Student Attendance\",\"col\":4}},{\"id\":\"sc_settings\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Edvronix Settings\",\"col\":4}},{\"id\":\"sc_guardian\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Guardian\",\"col\":4}},{\"id\":\"sc_graduation\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Student Graduation\",\"col\":4}},{\"id\":\"sp1\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"h_metrics\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Key Metrics</b></span>\",\"col\":12}},{\"id\":\"nc_students\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Students\",\"col\":4}},{\"id\":\"nc_fee\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Fee Collected This Month\",\"col\":4}},{\"id\":\"nc_outstanding\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Outstanding Fees\",\"col\":4}},{\"id\":\"nc_staff\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Staff\",\"col\":4}},{\"id\":\"nc_today\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Present Today\",\"col\":4}},{\"id\":\"nc_guardian\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Registered Guardians\",\"col\":4}},{\"id\":\"sp2\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"h_analytics\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Analytics</b></span>\",\"col\":12}},{\"id\":\"ch_monthly\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Monthly Fee Collection\",\"col\":12}},{\"id\":\"ch_status\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Fee Collection Status\",\"col\":6}},{\"id\":\"ch_program\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Students by Program\",\"col\":6}},{\"id\":\"sp3\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"h_reports\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Reports</b></span>\",\"col\":12}},{\"id\":\"c_fee\",\"type\":\"card\",\"data\":{\"card_name\":\"Fee Reports\",\"col\":4}},{\"id\":\"c_student\",\"type\":\"card\",\"data\":{\"card_name\":\"Student Reports\",\"col\":4}},{\"id\":\"c_admission\",\"type\":\"card\",\"data\":{\"card_name\":\"Admission and Guardian Reports\",\"col\":4}}]",
+  "custom_blocks": [],
+  "docstatus": 0,
+  "doctype": "Workspace",
+  "external_link": null,
+  "for_user": "",
+  "hide_custom": 0,
+  "icon": "education",
+  "indicator_color": null,
+  "is_hidden": 0,
+  "label": "Edvronix App",
+  "link_to": null,
+  "link_type": null,
+  "links": [
+   {
+    "dependencies": null,
+    "description": null,
+    "hidden": 0,
+    "icon": null,
+    "is_query_report": 0,
+    "label": "Student Reports",
+    "link_count": 0,
+    "link_to": null,
+    "link_type": null,
+    "onboard": 0,
+    "only_for": null,
+    "report_ref_doctype": null,
+    "type": "Card Break"
+   },
+   {
+    "dependencies": "",
+    "description": null,
+    "hidden": 0,
+    "icon": null,
+    "is_query_report": 1,
+    "label": "Defaulter Students Report",
+    "link_count": 0,
+    "link_to": "Defaulter Students Report",
+    "link_type": "Report",
+    "onboard": 0,
+    "only_for": null,
+    "report_ref_doctype": "Student",
+    "type": "Link"
+   },
+   {
+    "dependencies": "",
+    "description": null,
+    "hidden": 0,
+    "icon": null,
+    "is_query_report": 1,
+    "label": "Student Strength Report",
+    "link_count": 0,
+    "link_to": "Student Strength Report",
+    "link_type": "Report",
+    "onboard": 0,
+    "only_for": null,
+    "report_ref_doctype": "Student",
+    "type": "Link"
+   },
+   {
+    "dependencies": "",
+    "description": null,
+    "hidden": 0,
+    "icon": null,
+    "is_query_report": 1,
+    "label": "Student Stuck Off Report",
+    "link_count": 0,
+    "link_to": "Student Stuck Off Report",
+    "link_type": "Report",
+    "onboard": 0,
+    "only_for": null,
+    "report_ref_doctype": "Student",
+    "type": "Link"
+   },
+   {
+    "dependencies": null,
+    "description": null,
+    "hidden": 0,
+    "icon": null,
+    "is_query_report": 0,
+    "label": "Admission and Guardian Reports",
+    "link_count": 0,
+    "link_to": null,
+    "link_type": null,
+    "onboard": 0,
+    "only_for": null,
+    "report_ref_doctype": null,
+    "type": "Card Break"
+   },
+   {
+    "dependencies": "",
+    "description": null,
+    "hidden": 0,
+    "icon": null,
+    "is_query_report": 1,
+    "label": "Admission Summary Report",
+    "link_count": 0,
+    "link_to": "Admission Summary Report",
+    "link_type": "Report",
+    "onboard": 0,
+    "only_for": null,
+    "report_ref_doctype": "Student Applicant",
+    "type": "Link"
+   },
+   {
+    "dependencies": "",
+    "description": null,
+    "hidden": 0,
+    "icon": null,
+    "is_query_report": 1,
+    "label": "Guardian Contact Details",
+    "link_count": 0,
+    "link_to": "Guardian Contact Details",
+    "link_type": "Report",
+    "onboard": 0,
+    "only_for": null,
+    "report_ref_doctype": "Guardian",
+    "type": "Link"
+   },
+   {
+    "dependencies": "",
+    "description": null,
+    "hidden": 0,
+    "icon": null,
+    "is_query_report": 1,
+    "label": "Guardian with there Child Details Report",
+    "link_count": 0,
+    "link_to": "Guardian with there Child Details Report",
+    "link_type": "Report",
+    "onboard": 0,
+    "only_for": null,
+    "report_ref_doctype": "Guardian",
+    "type": "Link"
+   },
+   {
+    "dependencies": null,
+    "description": null,
+    "hidden": 0,
+    "icon": null,
+    "is_query_report": 0,
+    "label": "Fee Reports",
+    "link_count": 3,
+    "link_to": null,
+    "link_type": "DocType",
+    "onboard": 0,
+    "only_for": null,
+    "report_ref_doctype": null,
+    "type": "Card Break"
+   },
+   {
+    "dependencies": "",
+    "description": null,
+    "hidden": 0,
+    "icon": null,
+    "is_query_report": 1,
+    "label": "Monthly Outstanding or Dues Report",
+    "link_count": 0,
+    "link_to": "Monthly Outstanding or Dues Report",
+    "link_type": "Report",
+    "onboard": 0,
+    "only_for": null,
+    "report_ref_doctype": null,
+    "type": "Link"
+   },
+   {
+    "dependencies": "",
+    "description": null,
+    "hidden": 0,
+    "icon": null,
+    "is_query_report": 1,
+    "label": "Sales Invoice Item Report",
+    "link_count": 0,
+    "link_to": "Sales Invoice Item Report",
+    "link_type": "Report",
+    "onboard": 0,
+    "only_for": null,
+    "report_ref_doctype": null,
+    "type": "Link"
+   },
+   {
+    "dependencies": "",
+    "description": null,
+    "hidden": 0,
+    "icon": null,
+    "is_query_report": 1,
+    "label": "Fee Vouher in Bulk with Bank",
+    "link_count": 0,
+    "link_to": "Fee Vouher in Bulk with Bank",
+    "link_type": "Report",
+    "onboard": 0,
+    "only_for": null,
+    "report_ref_doctype": null,
+    "type": "Link"
+   }
+  ],
+  "modified": "2026-06-01 00:00:00",
+  "module": "Edvronix App",
+  "name": "Edvronix App",
+  "number_cards": [
+   {
+    "label": null,
+    "number_card_name": "Total Students"
+   },
+   {
+    "label": null,
+    "number_card_name": "Fee Collected This Month"
+   },
+   {
+    "label": null,
+    "number_card_name": "Outstanding Fees"
+   },
+   {
+    "label": null,
+    "number_card_name": "Total Staff"
+   },
+   {
+    "label": null,
+    "number_card_name": "Present Today"
+   },
+   {
+    "label": null,
+    "number_card_name": "Registered Guardians"
+   }
+  ],
+  "parent_page": "",
+  "public": 1,
+  "quick_lists": [],
+  "restrict_to_domain": "",
+  "roles": [],
+  "sequence_id": 20.0,
+  "shortcuts": [
+   {
+    "color": "Blue",
+    "doc_view": "List",
+    "format": "",
+    "icon": null,
+    "kanban_board": null,
+    "label": "Student",
+    "link_to": "Student",
+    "report_ref_doctype": null,
+    "restrict_to_domain": null,
+    "stats_filter": "",
+    "type": "DocType",
+    "url": null
+   },
+   {
+    "color": "Green",
+    "doc_view": "List",
+    "format": "",
+    "icon": null,
+    "kanban_board": null,
+    "label": "Sales Invoice",
+    "link_to": "Sales Invoice",
+    "report_ref_doctype": null,
+    "restrict_to_domain": null,
+    "stats_filter": "",
+    "type": "DocType",
+    "url": null
+   },
+   {
+    "color": "Yellow",
+    "doc_view": null,
+    "format": null,
+    "icon": null,
+    "kanban_board": null,
+    "label": "Print Bulk Voucher",
+    "link_to": null,
+    "report_ref_doctype": null,
+    "restrict_to_domain": null,
+    "stats_filter": null,
+    "type": "URL",
+    "url": "/app/query-report/Fee Vouher in Bulk with Bank"
+   },
+   {
+    "color": "Purple",
+    "doc_view": "List",
+    "format": "",
+    "icon": null,
+    "kanban_board": null,
+    "label": "Student Attendance",
+    "link_to": "Student Attendance",
+    "report_ref_doctype": null,
+    "restrict_to_domain": null,
+    "stats_filter": "",
+    "type": "DocType",
+    "url": null
+   },
+   {
+    "color": "Cyan",
+    "doc_view": null,
+    "format": null,
+    "icon": null,
+    "kanban_board": null,
+    "label": "Edvronix Settings",
+    "link_to": "Edvronix Settings",
+    "report_ref_doctype": null,
+    "restrict_to_domain": null,
+    "stats_filter": null,
+    "type": "DocType",
+    "url": null
+   },
+   {
+    "color": "Red",
+    "doc_view": "List",
+    "format": "",
+    "icon": null,
+    "kanban_board": null,
+    "label": "Guardian",
+    "link_to": "Guardian",
+    "report_ref_doctype": null,
+    "restrict_to_domain": null,
+    "stats_filter": "",
+    "type": "DocType",
+    "url": null
+   },
+   {
+    "color": "Pink",
+    "doc_view": "List",
+    "format": "",
+    "label": "Student Graduation",
+    "link_to": "Student Graduation",
+    "stats_filter": "",
+    "type": "DocType"
+   }
+  ],
+  "title": "Edvronix App",
+  "type": "Workspace"
+ }
+]

@@ -71,7 +71,16 @@ function _build_and_print(data, filters, settings) {
     let fee_month_filter = filters.month || "";
 
     // School details from Edvronix Settings
-    let school_name    = settings.school_name    || "School";
+    
+            // Convert hex color to "R, G, B" for rgba() watermark usage
+            function _hexToRgb(hex) {
+                let r = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+                return r ? `${parseInt(r[1],16)}, ${parseInt(r[2],16)}, ${parseInt(r[3],16)}` : "26, 58, 95";
+            }
+            let primary_color = settings.primary_color || "#1a365d";
+            let primary_rgb   = _hexToRgb(primary_color);
+
+            let school_name    = settings.school_name    || "School";
     let school_logo    = settings.school_logo    || "";
     let watermark_text = settings.watermark_text || school_name;
     let address        = settings.address        || "";
@@ -181,7 +190,7 @@ function _build_and_print(data, filters, settings) {
 
             .voucher-wrapper {
                 flex: 1;
-                border: 1.5px solid #1a3a5f;
+                border: 1.5px solid ${primary_color};
                 padding: 12px;
                 position: relative;
                 background-color: #fff;
@@ -197,25 +206,25 @@ function _build_and_print(data, filters, settings) {
                 top: 50%; left: 50%;
                 transform: translate(-50%, -50%) rotate(-45deg);
                 font-size: 60px;
-                color: rgba(26, 58, 95, 0.03);
+                color: ${`rgba(${primary_rgb}, 0.03)`};
                 font-weight: bold;
                 z-index: 0;
             }
 
             .copy-tag {
                 position: absolute; top: 0; right: 0;
-                background: #1a3a5f; color: #fff;
+                background: ${primary_color}; color: #fff;
                 padding: 4px 12px; font-size: 9px; font-weight: bold; text-transform: uppercase;
                 border-bottom-left-radius: 8px; z-index: 2;
             }
 
-            .header { display: flex; margin-top: 10px; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #1a3a5f; padding-bottom: 8px; margin-bottom: 5px; position: relative; z-index:1; }
-            .school-name { font-size: 13px; font-weight: 900; color: #1a3a5f; margin: 0; }
+            .header { display: flex; margin-top: 10px; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid ${primary_color}; padding-bottom: 8px; margin-bottom: 5px; position: relative; z-index:1; }
+            .school-name { font-size: 13px; font-weight: 900; color: ${primary_color}; margin: 0; }
             .contact-info { font-size: 7.5px; color: #4a5568; margin-top: 2px; line-height: 1.2; }
-            .challan-title { font-size: 13px; font-weight: 700; color: #1a3a5f; text-align: right; }
+            .challan-title { font-size: 13px; font-weight: 700; color: ${primary_color}; text-align: right; }
 
             .bank-details-box {
-                background: #f1f5f9; border: 1px solid #1a3a5f; padding: 6px;
+                background: #f1f5f9; border: 1px solid ${primary_color}; padding: 6px;
                 margin-bottom: 10px; border-radius: 4px; display: flex;
                 justify-content: space-between; font-size: 8px; position: relative; z-index: 1;
             }
@@ -227,15 +236,15 @@ function _build_and_print(data, filters, settings) {
 
             .student-table-container { flex-grow: 1; z-index: 1; position: relative; }
             table { width: 100%; border-collapse: collapse; margin-bottom: 10px; }
-            th { background: #f8fafc; border: 1px solid #e2e8f0; padding: 6px; text-align: left; font-size: 8px; color: #1a3a5f; text-transform: uppercase; }
+            th { background: #f8fafc; border: 1px solid #e2e8f0; padding: 6px; text-align: left; font-size: 8px; color: ${primary_color}; text-transform: uppercase; }
             td { border: 1px solid #e2e8f0; padding: 6px; font-size: 9px; color: #2d3748; }
 
             .footer-content { margin-top: auto; }
             .footer-grid { display: flex; justify-content: space-between; gap: 8px; }
             .policy-section { flex: 1.2; font-size: 8px; background: #fdf2f2; border: 1px solid #feb2b2; padding: 8px; border-radius: 4px; }
-            .amount-table { width: 100%; border: 1px solid #1a3a5f; border-radius: 4px; overflow: hidden; font-size: 10px; }
+            .amount-table { width: 100%; border: 1px solid ${primary_color}; border-radius: 4px; overflow: hidden; font-size: 10px; }
             .amount-row { display: flex; justify-content: space-between; padding: 4px 6px; }
-            .amount-total { background: #1a3a5f; color: #fff; font-weight: bold; padding: 6px; }
+            .amount-total { background: ${primary_color}; color: #fff; font-weight: bold; padding: 6px; }
 
             .signatures { display: flex; justify-content: space-between; margin-top: 15px; }
             .sig-box { border-top: 1.5px solid #1a202c; width: 45%; text-align: center; font-size: 9px; padding-top: 4px; font-weight: 600; }
@@ -299,12 +308,12 @@ function _build_and_print(data, filters, settings) {
 
                 <div class="bank-details-box">
                     <div>
-                        <div style="font-size: 8px; color: #1a3a5f; font-weight: bold; text-transform: uppercase;">Bank Account Details</div>
-                        <div style="font-size: 11px; font-weight: 700; color: #1a3a5f;">${bank_display}</div>
+                        <div style="font-size: 8px; color: ${primary_color}; font-weight: bold; text-transform: uppercase;">Bank Account Details</div>
+                        <div style="font-size: 11px; font-weight: 700; color: ${primary_color};">${bank_display}</div>
                         <div style="font-size: 10px; color: #2d3748;"><b>A/C Title:</b> ${account_title}</div>
                     </div>
                     <div style="text-align: right;">
-                        <div style="font-size: 8px; color: #1a3a5f; font-weight: bold; text-transform: uppercase;">IBAN</div>
+                        <div style="font-size: 8px; color: ${primary_color}; font-weight: bold; text-transform: uppercase;">IBAN</div>
                         <div style="font-size: 11px; font-weight: bold; font-family: monospace;">${iban}</div>
                     </div>
                 </div>

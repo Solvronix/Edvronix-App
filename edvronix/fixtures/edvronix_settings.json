@@ -1,20 +1,68 @@
 [
  {
+  "account_number": null,
+  "account_title": null,
+  "address": null,
+  "bank_name": null,
+  "branch_name": null,
+  "docstatus": 0,
   "doctype": "Edvronix Settings",
-  "name": "Edvronix Settings",
+  "email": null,
+  "iban": null,
+  "item_abbreviations": [
+   {
+    "abbreviation": "An",
+    "item_name": "Annual Fund"
+   },
+   {
+    "abbreviation": "Mon",
+    "item_name": "Monthly Tuition Fee"
+   },
+   {
+    "abbreviation": "Adm",
+    "item_name": "Admission Fee"
+   },
+   {
+    "abbreviation": "Exam",
+    "item_name": "Exam Fee"
+   },
+   {
+    "abbreviation": "Act",
+    "item_name": "Activity Fee"
+   },
+   {
+    "abbreviation": "Ext",
+    "item_name": "Extra Charges"
+   },
+   {
+    "abbreviation": "Fine",
+    "item_name": "Late Fee"
+   },
+   {
+    "abbreviation": "Scho",
+    "item_name": "Scholership"
+   },
+   {
+    "abbreviation": "Sib",
+    "item_name": "Sibling Discount"
+   },
+   {
+    "abbreviation": "Trans",
+    "item_name": "Transport Fee"
+   }
+  ],
   "late_fee_after_10": 100,
   "late_fee_after_20": 200,
-  "item_abbreviations": [
-   {"item_name": "Annual Fund", "abbreviation": "An"},
-   {"item_name": "Monthly Tuition Fee", "abbreviation": "Mon"},
-   {"item_name": "Admission Fee", "abbreviation": "Adm"},
-   {"item_name": "Exam Fee", "abbreviation": "Exam"},
-   {"item_name": "Activity Fee", "abbreviation": "Act"},
-   {"item_name": "Extra Charges", "abbreviation": "Ext"},
-   {"item_name": "Late Fee", "abbreviation": "Fine"},
-   {"item_name": "Scholership", "abbreviation": "Scho"},
-   {"item_name": "Sibling Discount", "abbreviation": "Sib"},
-   {"item_name": "Transport Fee", "abbreviation": "Trans"}
-  ]
+  "late_fee_policy_text": null,
+  "mobile": null,
+  "modified": "2026-06-04 11:39:50.687513",
+  "name": "Edvronix Settings",
+  "phone": null,
+  "school_logo": null,
+  "school_name": null,
+  "swift_code": null,
+  "terms_templates": [],
+  "watermark_text": null,
+  "website": null
  }
 ]

@@ -45,6 +45,8 @@ def get_edvronix_settings():
 		"mobile": settings.mobile or "",
 		"email": settings.email or "",
 		"website": settings.website or "",
+		"email_domain": settings.email_domain or "edu.pk",
+		"primary_color": settings.primary_color or "#1a365d",
 		"bank_name": settings.bank_name or "",
 		"account_title": settings.account_title or "",
 		"account_number": settings.account_number or "",

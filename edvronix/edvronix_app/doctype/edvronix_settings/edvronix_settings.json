@@ -14,6 +14,8 @@
   "mobile",
   "email",
   "website",
+  "email_domain",
+  "primary_color",
   "section_bank_details",
   "bank_name",
   "account_title",
@@ -22,6 +24,9 @@
   "column_break_bank",
   "branch_name",
   "swift_code",
+  "section_cost_center",
+  "male_cost_center",
+  "female_cost_center",
   "section_late_fee",
   "late_fee_policy_text",
   "column_break_late_fee",
@@ -85,6 +90,21 @@
    "label": "Website"
   },
   {
+   "default": "edu.pk",
+   "description": "The TLD part after your school name in auto-generated student emails. e.g. edu.pk → ahmadali32@alnoor.edu.pk | edu.com → ahmadali32@alnoor.edu.com | school.com → ahmadali32@alnoor.school.com. Do NOT add a leading dot.",
+   "fieldname": "email_domain",
+   "fieldtype": "Data",
+   "label": "Student Email Domain",
+   "placeholder": "e.g. edu.pk"
+  },
+  {
+   "default": "#1a365d",
+   "description": "Primary brand color used on all fee vouchers and challans. Default is navy blue.",
+   "fieldname": "primary_color",
+   "fieldtype": "Color",
+   "label": "Primary Brand Color"
+  },
+  {
    "fieldname": "section_bank_details",
    "fieldtype": "Section Break",
    "label": "Bank Details"
@@ -122,6 +142,24 @@
    "fieldname": "swift_code",
    "fieldtype": "Data",
    "label": "Swift Code"
+  },
+  {
+   "fieldname": "section_cost_center",
+   "fieldtype": "Section Break",
+   "label": "Cost Center Settings",
+   "description": "Optional. Assign gender-based cost centers for fee invoices. Leave blank to use item defaults."
+  },
+  {
+   "fieldname": "male_cost_center",
+   "fieldtype": "Link",
+   "label": "Boys / Male Cost Center",
+   "options": "Cost Center"
+  },
+  {
+   "fieldname": "female_cost_center",
+   "fieldtype": "Link",
+   "label": "Girls / Female Cost Center",
+   "options": "Cost Center"
   },
   {
    "fieldname": "section_late_fee",

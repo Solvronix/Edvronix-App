@@ -7,8 +7,19 @@ description = "School Management System by Solvronix"
 requires-python = ">=3.14"
 readme = "README.md"
 dynamic = ["version"]
+# ── Frappe ecosystem dependencies ────────────────────────────────────────────
+# Installed and managed by bench (not PyPI). Version constraints below are for
+# documentation and tooling only. Runtime enforcement is via required_apps in
+# hooks.py. edvronix supports these versions and all onward releases:
+#
+#   frappe    >= 16.0.0   (tested: 16.18.0)
+#   erpnext   >= 16.0.0   (tested: 16.18.1)
+#   education >= 17.0.0   (tested: 17.0.0-dev)
+#
 dependencies = [
-    # "frappe~=16.0.0" # Installed and managed by bench.
+    # "frappe>=16.0.0",    # managed by bench
+    # "erpnext>=16.0.0",   # managed by bench
+    # "education>=17.0.0", # managed by bench
 ]
 
 [build-system]

@@ -41,14 +41,14 @@ def execute(filters=None):
                     "student": row.student,
                     "docstatus": 1
                 },
-                ["program", "student_category", "tuition_fee"],
+                ["program", "student_category", "custom_tuition_fee"],
                 order_by="creation desc",
                 as_dict=True
             )
 
             program = enrollment.program if enrollment else "N/A"
             category = enrollment.student_category if enrollment else "N/A"
-            fee = enrollment.tuition_fee if enrollment else "N/A"
+            fee = enrollment.custom_tuition_fee if enrollment else "N/A"
 
             #  FINAL FORMAT YOU ASKED
             student_names.append(

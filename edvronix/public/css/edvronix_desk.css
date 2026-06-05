@@ -1,3 +1,17 @@
+/* ── Hide ERPNext / app-name branding from sidebar header ─────────────────── */
+/* The sidebar shows the app subtitle (e.g. "ERPNext", "Education") below the
+   module name. This hides it so the product appears as Edvronix, not ERPNext. */
+.sidebar-header .header-subtitle {
+  display: none !important;
+}
+
+/* ── Full-width workspace layout ──────────────────────────────────────────── */
+/* Frappe 16 caps workspace at --page-max-width (900px) unless body.full-width.
+   Override it here so the Edvronix workspace uses the entire browser width.   */
+[data-page-route="Workspaces"] .layout-main {
+  max-width: 100% !important;
+}
+
 /* Edvronix module sidebar accent */
 [data-module-name="Edvronix App"] .sidebar-item {
   border-left: 3px solid #2563eb;
@@ -87,4 +101,36 @@
   font-size: 14px;
   color: rgba(255, 255, 255, 0.8);
   margin: 0;
+}
+
+/* ── Edvronix workspace home-grid icon override ──────────────────────────── */
+/* Targets the rounded square tile on the Frappe home/desk grid page.          */
+.desktop-icon[data-id="Edvronix App"] .icon-container {
+  background-image: url('/assets/edvronix/images/edvronix-logo.svg');
+  background-size: 80%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #ffffff !important;
+}
+
+.desktop-icon[data-id="Edvronix App"] .icon-container .app-icon {
+  display: none !important;
+}
+
+/* ── Edvronix workspace sidebar icon override ────────────────────────────── */
+/* Targets the left sidebar navigation item.                                   */
+[data-label="Edvronix App"] .sidebar-item-icon svg,
+.standard-sidebar-item[data-label="Edvronix App"] .sidebar-item-icon svg {
+  display: none !important;
+}
+
+[data-label="Edvronix App"] .sidebar-item-icon,
+.standard-sidebar-item[data-label="Edvronix App"] .sidebar-item-icon {
+  background-image: url('/assets/edvronix/images/edvronix-logo.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 20px !important;
+  height: 20px !important;
+  display: inline-block;
 }

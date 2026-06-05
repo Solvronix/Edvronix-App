@@ -4,7 +4,7 @@
  "creation": "2026-06-01 00:00:00.000000",
  "doctype": "Number Card",
  "document_type": "Sales Invoice",
- "filters_json": "[[\"Sales Invoice\",\"docstatus\",\"=\",1],[\"Sales Invoice\",\"outstanding_amount\",\"=\",0],[\"Sales Invoice\",\"posting_date\",\"Between\",[\"2026-06-01\",\"2026-06-30\"]]]",
+ "filters_json": "[[\"Sales Invoice\",\"docstatus\",\"=\",1],[\"Sales Invoice\",\"outstanding_amount\",\"=\",0],[\"Sales Invoice\",\"posting_date\",\"Timespan\",\"this month\"]]",
  "function": "Sum",
  "is_public": 1,
  "is_standard": 1,
