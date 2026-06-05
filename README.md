@@ -263,3 +263,4 @@ Built with care by **[Solvronix](https://solvronix.com)** · Lahore, Pakistan
 *Empowering schools with modern ERP tools*
 
 </div>
+# Edvronix-App
