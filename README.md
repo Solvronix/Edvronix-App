@@ -36,8 +36,8 @@ Built on [Frappe](https://frappeframework.com) · Powered by [ERPNext](https://e
 <br /><sub><b>Edvronix Settings</b> — school info, bank details, brand color, cost centers, late fee policy</sub>
 </td>
 <td align="center" width="50%">
-<img src="docs/sidebar.png" alt="Workspace Sidebar" />
-<br /><sub><b>Workspace Navigation</b> — collapsible sidebar with Fee Reports, Student Reports, Admission &amp; Guardian groups</sub>
+<img src="docs/workspace-home.png" alt="Workspace Home" />
+<br /><sub><b>Workspace Home</b> — Quick Actions shortcuts (Student, Sales Invoice, Bulk Voucher, Attendance, Guardian) + live Key Metrics</sub>
 </td>
 </tr>
 </table>
