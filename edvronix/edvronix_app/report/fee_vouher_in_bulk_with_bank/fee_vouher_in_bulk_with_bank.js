@@ -93,6 +93,7 @@ function _build_and_print(data, filters, settings) {
     let bank_name      = settings.bank_name      || "";
     let branch_name    = settings.branch_name    || "";
     let account_title  = settings.account_title  || "";
+    let account_number = settings.account_number || "";
     let iban           = settings.iban           || "";
 
     // Late fee policy from Edvronix Settings
@@ -311,6 +312,7 @@ function _build_and_print(data, filters, settings) {
                         <div style="font-size: 8px; color: ${primary_color}; font-weight: bold; text-transform: uppercase;">Bank Account Details</div>
                         <div style="font-size: 11px; font-weight: 700; color: ${primary_color};">${bank_display}</div>
                         <div style="font-size: 10px; color: #2d3748;"><b>A/C Title:</b> ${account_title}</div>
+                        ${/* account_number ? `<div style="font-size: 10px; color: #2d3748;"><b>A/C No:</b> ${account_number}</div>` : */ ''}
                     </div>
                     <div style="text-align: right;">
                         <div style="font-size: 8px; color: ${primary_color}; font-weight: bold; text-transform: uppercase;">IBAN</div>

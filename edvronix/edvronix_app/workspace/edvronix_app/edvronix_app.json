@@ -1,8 +1,18 @@
 {
  "app": "edvronix",
- "charts": [],
- "content": "[{\"id\":\"h_quick\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Quick Actions</b></span>\",\"col\":12}},{\"id\":\"sc_student\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Student\",\"col\":4}},{\"id\":\"sc_invoice\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sales Invoice\",\"col\":4}},{\"id\":\"sc_voucher\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Print Bulk Voucher\",\"col\":4}},{\"id\":\"sc_attend\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Student Attendance\",\"col\":4}},{\"id\":\"sc_settings\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Edvronix Settings\",\"col\":4}},{\"id\":\"sc_guardian\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Guardian\",\"col\":4}},{\"id\":\"sc_graduation\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Student Graduation\",\"col\":4}},{\"id\":\"sp1\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"h_metrics\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Key Metrics</b></span>\",\"col\":12}},{\"id\":\"nc_students\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Students\",\"col\":4}},{\"id\":\"nc_fee\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Fee Collected This Month\",\"col\":4}},{\"id\":\"nc_outstanding\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Outstanding Fees\",\"col\":4}},{\"id\":\"nc_staff\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Staff\",\"col\":4}},{\"id\":\"nc_today\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Present Today\",\"col\":4}},{\"id\":\"nc_guardian\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Registered Guardians\",\"col\":4}},{\"id\":\"sp2\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"h_analytics\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Analytics</b></span>\",\"col\":12}},{\"id\":\"ch_monthly\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Monthly Fee Collection\",\"col\":12}},{\"id\":\"ch_status\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Fee Collection Status\",\"col\":6}},{\"id\":\"ch_program\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Students by Program\",\"col\":6}},{\"id\":\"sp3\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"h_reports\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Reports</b></span>\",\"col\":12}},{\"id\":\"c_fee\",\"type\":\"card\",\"data\":{\"card_name\":\"Fee Reports\",\"col\":4}},{\"id\":\"c_student\",\"type\":\"card\",\"data\":{\"card_name\":\"Student Reports\",\"col\":4}},{\"id\":\"c_admission\",\"type\":\"card\",\"data\":{\"card_name\":\"Admission and Guardian Reports\",\"col\":4}}]",
- "creation": "2026-06-04 15:28:17.385365",
+ "charts": [
+  {
+   "chart_name": "Monthly Fee Collection"
+  },
+  {
+   "chart_name": "Fee Collection Status"
+  },
+  {
+   "chart_name": "Students by Program"
+  }
+ ],
+ "content": "[{\"id\":\"h_quick\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Quick Actions</b></span>\",\"col\":12}},{\"id\":\"sc_student\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Student\",\"col\":4}},{\"id\":\"sc_invoice\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sales Invoice\",\"col\":4}},{\"id\":\"sc_voucher\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Print Bulk Voucher\",\"col\":4}},{\"id\":\"sc_attend\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Student Attendance\",\"col\":4}},{\"id\":\"sc_guardian\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Guardian\",\"col\":4}},{\"id\":\"sc_graduation\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Student Graduation\",\"col\":4}},{\"id\":\"5kSTqZbaqy\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"General Ledger\",\"col\":3}},{\"id\":\"sp1\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"h_metrics\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Key Metrics</b></span>\",\"col\":12}},{\"id\":\"nc_students\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Students\",\"col\":4}},{\"id\":\"nc_fee\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Fee Collected This Month\",\"col\":4}},{\"id\":\"nc_outstanding\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Outstanding Fees\",\"col\":4}},{\"id\":\"nc_staff\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Staff\",\"col\":4}},{\"id\":\"nc_today\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Present Today\",\"col\":4}},{\"id\":\"nc_guardian\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Registered Guardians\",\"col\":4}},{\"id\":\"sp2\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"h_analytics\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Analytics</b></span>\",\"col\":12}},{\"id\":\"ch_monthly\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Monthly Fee Collection\",\"col\":12}},{\"id\":\"ch_status\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Fee Collection Status\",\"col\":6}},{\"id\":\"ch_program\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Students by Program\",\"col\":6}},{\"id\":\"sp3\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"h_reports\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Reports</b></span>\",\"col\":12}},{\"id\":\"c_fee\",\"type\":\"card\",\"data\":{\"card_name\":\"Fee Reports\",\"col\":4}},{\"id\":\"c_student\",\"type\":\"card\",\"data\":{\"card_name\":\"Student Reports\",\"col\":4}},{\"id\":\"c_admission\",\"type\":\"card\",\"data\":{\"card_name\":\"Admission and Guardian Reports\",\"col\":4}}]",
+ "creation": "2026-06-05 15:33:11.684237",
  "custom_blocks": [],
  "docstatus": 0,
  "doctype": "Workspace",
@@ -13,6 +23,50 @@
  "is_hidden": 0,
  "label": "Edvronix App",
  "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Student Reports",
+   "link_count": 0,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Defaulter Students Report",
+   "link_count": 0,
+   "link_to": "Defaulter Students Report",
+   "link_type": "Report",
+   "onboard": 0,
+   "report_ref_doctype": "Student",
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Student Strength Report",
+   "link_count": 0,
+   "link_to": "Student Strength Report",
+   "link_type": "Report",
+   "onboard": 0,
+   "report_ref_doctype": "Student",
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Student Stuck Off Report",
+   "link_count": 0,
+   "link_to": "Student Stuck Off Report",
+   "link_type": "Report",
+   "onboard": 0,
+   "report_ref_doctype": "Student",
+   "type": "Link"
+  },
   {
    "hidden": 0,
    "is_query_report": 0,
@@ -98,66 +152,32 @@
    "link_type": "Report",
    "onboard": 0,
    "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Student Reports",
-   "link_count": 3,
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "dependencies": "",
-   "hidden": 0,
-   "is_query_report": 1,
-   "label": "Student Strength Report",
-   "link_count": 0,
-   "link_to": "Student Strength Report",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "dependencies": "",
-   "hidden": 0,
-   "is_query_report": 1,
-   "label": "Student Stuck Off Report",
-   "link_count": 0,
-   "link_to": "Student Stuck Off Report",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 1,
-   "label": "Journal Entry Report",
-   "link_count": 0,
-   "link_to": "Journal Entry Report",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "dependencies": "",
-   "hidden": 0,
-   "is_query_report": 1,
-   "label": "Graduated Students Report",
-   "link_count": 0,
-   "link_to": "Graduated Students Report",
-   "link_type": "Report",
-   "onboard": 0,
-   "report_ref_doctype": "Student",
-   "type": "Link"
   }
  ],
- "modified": "2026-06-04 15:52:06.985414",
+ "modified": "2026-06-05 15:53:28.446183",
  "modified_by": "Administrator",
  "module": "Edvronix App",
  "name": "Edvronix App",
- "number_cards": [],
+ "number_cards": [
+  {
+   "number_card_name": "Total Students"
+  },
+  {
+   "number_card_name": "Fee Collected This Month"
+  },
+  {
+   "number_card_name": "Outstanding Fees"
+  },
+  {
+   "number_card_name": "Total Staff"
+  },
+  {
+   "number_card_name": "Present Today"
+  },
+  {
+   "number_card_name": "Registered Guardians"
+  }
+ ],
  "owner": "Administrator",
  "parent_page": "",
  "public": 1,
@@ -166,6 +186,14 @@
  "roles": [],
  "sequence_id": 20.0,
  "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "General Ledger",
+   "link_to": "General Ledger",
+   "report_ref_doctype": "GL Entry",
+   "type": "Report"
+  },
   {
    "color": "Blue",
    "doc_view": "List",
@@ -197,12 +225,6 @@
    "label": "Student Attendance",
    "link_to": "Student Attendance",
    "stats_filter": "",
-   "type": "DocType"
-  },
-  {
-   "color": "Cyan",
-   "label": "Edvronix Settings",
-   "link_to": "Edvronix Settings",
    "type": "DocType"
   },
   {

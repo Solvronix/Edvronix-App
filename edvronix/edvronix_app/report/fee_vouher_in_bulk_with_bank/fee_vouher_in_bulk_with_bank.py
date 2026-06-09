@@ -17,7 +17,7 @@ def execute(filters=None):
         return get_columns(), [], None, None, []
 
     columns = get_columns()
-    
+
     guardian = filters.get("guardian") or ""
     academic_year = filters.get("academic_year") or ""
     month = filters.get("month") or ""

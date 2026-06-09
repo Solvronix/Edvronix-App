@@ -64,8 +64,9 @@ fixtures = [
             ]]
         ]
     },
-    {"dt": "Edvronix Settings"},
-    {"dt": "Workspace",      "filters": [["name", "=", "Edvronix App"]]},
+    {"dt": "Workspace",         "filters": [["name", "=", "Edvronix App"]]},
+    {"dt": "Workspace Sidebar", "filters": [["name", "=", "Edvronix App"]]},
+    {"dt": "Desktop Icon",      "filters": [["name", "=", "Edvronix App"]]},
     {"dt": "Number Card",    "filters": [["module", "=", "Edvronix App"]]},
     # Dashboard Charts: Frappe 16 blocks re-importing standard charts.
     # They are created on first install via the module-level JSON files.

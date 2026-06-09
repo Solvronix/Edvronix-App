@@ -17,6 +17,33 @@ Built on [Frappe](https://frappeframework.com) · Powered by [ERPNext](https://e
 
 ---
 
+## Screenshots
+
+<table>
+<tr>
+<td align="center" width="50%">
+<img src="docs/dashboard.png" alt="Edvronix Dashboard" />
+<br /><sub><b>Analytics Dashboard</b> — 6 live KPI cards + 3 charts (Monthly Fee Collection, Fee Status, Students by Program)</sub>
+</td>
+<td align="center" width="50%">
+<img src="docs/monthly-outstanding-report.png" alt="Monthly Outstanding Report" />
+<br /><sub><b>Monthly Outstanding / Dues Report</b> — per-student fee status, arrears, defaulters with summary totals</sub>
+</td>
+</tr>
+<tr>
+<td align="center" width="50%">
+<img src="docs/edvronix-settings.png" alt="Edvronix Settings" />
+<br /><sub><b>Edvronix Settings</b> — school info, bank details, brand color, cost centers, late fee policy</sub>
+</td>
+<td align="center" width="50%">
+<img src="docs/sidebar.png" alt="Workspace Sidebar" />
+<br /><sub><b>Workspace Navigation</b> — collapsible sidebar with Fee Reports, Student Reports, Admission &amp; Guardian groups</sub>
+</td>
+</tr>
+</table>
+
+---
+
 ## Overview
 
 **Edvronix** is a production-ready Frappe application that extends ERPNext and the Education module for K-12 schools in Pakistan. It provides fee management, student admission workflows, guardian tracking, bulk voucher printing, and detailed analytics — all configured through a single settings doctype with no code changes required.
@@ -263,4 +290,3 @@ Built with care by **[Solvronix](https://solvronix.com)** · Lahore, Pakistan
 *Empowering schools with modern ERP tools*
 
 </div>
-# Edvronix-App

@@ -1,0 +1,16 @@
+[
+ {
+  "name": "Edvronix App",
+  "doctype": "Desktop Icon",
+  "label": "Edvronix App",
+  "icon_type": "Link",
+  "link_type": "Workspace Sidebar",
+  "link_to": "Edvronix App",
+  "app": null,
+  "logo_url": "/assets/edvronix/images/edvronix-logo.svg",
+  "standard": 1,
+  "hidden": 0,
+  "restrict_removal": 0,
+  "bg_color": "gray"
+ }
+]

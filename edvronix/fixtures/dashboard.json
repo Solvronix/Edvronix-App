@@ -1,1 +1,22 @@
-[]
+[
+ {
+  "name": "Edvronix Dashboard",
+  "doctype": "Dashboard",
+  "dashboard_name": "Edvronix Dashboard",
+  "module": "Edvronix App",
+  "is_default": 0,
+  "cards": [
+   {"card": "Total Students"},
+   {"card": "Fee Collected This Month"},
+   {"card": "Outstanding Fees"},
+   {"card": "Total Staff"},
+   {"card": "Present Today"},
+   {"card": "Registered Guardians"}
+  ],
+  "charts": [
+   {"chart": "Monthly Fee Collection", "width": "Full"},
+   {"chart": "Fee Collection Status",  "width": "Half"},
+   {"chart": "Students by Program",    "width": "Half"}
+  ]
+ }
+]
