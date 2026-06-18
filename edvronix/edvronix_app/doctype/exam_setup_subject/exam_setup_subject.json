@@ -1,0 +1,48 @@
+{
+ "actions": [],
+ "creation": "2026-01-01 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "assessment_criteria",
+  "max_marks",
+  "passing_marks"
+ ],
+ "fields": [
+  {
+   "fieldname": "assessment_criteria",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Subject",
+   "options": "Assessment Criteria",
+   "reqd": 1
+  },
+  {
+   "default": "100",
+   "fieldname": "max_marks",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Max Marks",
+   "reqd": 1
+  },
+  {
+   "default": "40",
+   "fieldname": "passing_marks",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Passing Marks"
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-01-01 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Edvronix App",
+ "name": "Exam Setup Subject",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 0
+}

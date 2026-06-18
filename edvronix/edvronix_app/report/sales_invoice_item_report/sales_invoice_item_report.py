@@ -37,10 +37,13 @@ def execute(filters=None):
             "student": "",
             "student_name": "<b>TOTAL</b>",
             "guardian_name": "",
+            "program": "",
+            "student_category": "",
             "item": "",
             "amount": total_amount,
             "paid": total_paid,
             "outstanding": total_outstanding,
+            "invoice_status": "",
             "payment_date": "",
             "posting_date": "",
         })
@@ -55,6 +58,8 @@ def get_columns():
         {"label": "Student", "fieldname": "student", "fieldtype": "Link", "options": "Student", "width": 130},
         {"label": "Student Name", "fieldname": "student_name", "fieldtype": "Data", "width": 180},
         {"label": "Guardian Name", "fieldname": "guardian_name", "fieldtype": "Data", "width": 160},
+        {"label": "Class", "fieldname": "program", "fieldtype": "Link", "options": "Program", "width": 150},
+        {"label": "Section", "fieldname": "student_category", "fieldtype": "Link", "options": "Student Category", "width": 130},
         {"label": "Item", "fieldname": "item", "fieldtype": "Link", "options": "Item", "width": 180},
         {"label": "Amount", "fieldname": "amount", "fieldtype": "Currency", "width": 130},
         {"label": "Paid", "fieldname": "paid", "fieldtype": "Currency", "width": 130},
@@ -71,6 +76,8 @@ def get_data(filters):
     if conditions:
         where_clause = "WHERE " + " AND ".join(conditions)
 
+    values["academic_year_pe"] = filters.get("academic_year") or ""
+
     query = f"""
         SELECT
             si.name AS invoice,
@@ -81,6 +88,8 @@ def get_data(filters):
              INNER JOIN `tabStudent Guardian` sg ON sg.guardian = g.name
              WHERE sg.parent = s.name
              ORDER BY sg.idx ASC LIMIT 1) AS guardian_name,
+            pe.program AS program,
+            pe.student_category AS student_category,
             si_item.item_code AS item,
             si_item.amount AS amount,
             si_item.idx AS item_idx,
@@ -90,11 +99,11 @@ def get_data(filters):
                 WHEN si.outstanding_amount = si.grand_total THEN 'Not Paid'
                 ELSE 'Partial Paid'
             END AS invoice_status,
-            (SELECT MAX(pe.posting_date)
-             FROM `tabPayment Entry` pe
-             INNER JOIN `tabPayment Entry Reference` per ON pe.name = per.parent
+            (SELECT MAX(pe2.posting_date)
+             FROM `tabPayment Entry` pe2
+             INNER JOIN `tabPayment Entry Reference` per ON pe2.name = per.parent
              WHERE per.reference_name = si.name
-             AND pe.docstatus = 1) AS payment_date,
+             AND pe2.docstatus = 1) AS payment_date,
             si.posting_date AS posting_date
         FROM
             `tabSales Invoice` AS si
@@ -102,6 +111,16 @@ def get_data(filters):
             `tabSales Invoice Item` AS si_item ON si_item.parent = si.name
         LEFT JOIN
             `tabStudent` AS s ON s.name = si.student
+        LEFT JOIN
+            `tabProgram Enrollment` pe
+            ON pe.student = si.student
+            AND pe.docstatus = 1
+            AND pe.name = (
+                SELECT name FROM `tabProgram Enrollment` pe_sub
+                WHERE pe_sub.student = si.student AND pe_sub.docstatus = 1
+                  AND (%(academic_year_pe)s = '' OR pe_sub.academic_year = %(academic_year_pe)s)
+                ORDER BY pe_sub.academic_year DESC LIMIT 1
+            )
         {where_clause}
         ORDER BY
             si.posting_date DESC, si.name, si_item.idx
@@ -144,6 +163,8 @@ def apply_priority_allocation(raw_data):
                 'student': row['student'],
                 'student_name': row['student_name'],
                 'guardian_name': row.get('guardian_name') or '',
+                'program': row.get('program') or '',
+                'student_category': row.get('student_category') or '',
                 'item': row['item'],
                 'amount': item_amount,
                 'paid': item_paid,

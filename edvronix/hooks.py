@@ -15,7 +15,8 @@ app_include_css = ["/assets/edvronix/css/edvronix_desk.css"]
 app_include_js  = ["/assets/edvronix/js/edvronix_desk.js"]
 
 # ── Post-migrate hook: fixes workspace child tables and number card filter ────
-after_migrate = ["edvronix.patches.fix_workspace_number_cards.execute"]
+after_migrate    = ["edvronix.patches.fix_workspace_number_cards.execute"]
+before_uninstall = "edvronix.install.before_uninstall"
 
 # ── Document events ───────────────────────────────────────────────────────────
 doc_events = {
@@ -83,7 +84,8 @@ fixtures = [
         "filters": [["name", "in", [
             "edvronix-student-applicant-email-readonly",
             "edvronix-student-list-status",
-            "edvronix-student-graduate-button"
+            "edvronix-student-graduate-button",
+            "edvronix-exam-setup-progress"
         ]]]
     },
 ]

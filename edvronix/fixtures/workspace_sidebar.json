@@ -24,44 +24,88 @@
    },
    {
     "type": "Section Break",
-    "label": "Fee Reports",
+    "label": "Students",
     "collapsible": 1,
     "keep_closed": 0,
     "child": 0
    },
    {
     "type": "Link",
-    "label": "School Fee Summary",
-    "link_type": "Report",
-    "link_to": "School Fee Summary",
+    "label": "Student Applicant",
+    "link_type": "DocType",
+    "link_to": "Student Applicant",
+    "icon": "user-plus",
     "child": 1
    },
    {
     "type": "Link",
-    "label": "Student Fee Collection",
+    "label": "All Students",
+    "link_type": "DocType",
+    "link_to": "Student",
+    "icon": "users",
+    "child": 1
+   },
+   {
+    "type": "Link",
+    "label": "Guardians",
+    "link_type": "DocType",
+    "link_to": "Guardian",
+    "icon": "heart",
+    "child": 1
+   },
+   {
+    "type": "Link",
+    "label": "Student Group",
+    "link_type": "DocType",
+    "link_to": "Student Group",
+    "icon": "layers",
+    "child": 1
+   },
+   {
+    "type": "Link",
+    "label": "Program Enrollment",
+    "link_type": "DocType",
+    "link_to": "Program Enrollment",
+    "icon": "book-open",
+    "child": 1
+   },
+   {
+    "type": "Section Break",
+    "label": "Fee Management",
+    "collapsible": 1,
+    "keep_closed": 0,
+    "child": 0
+   },
+   {
+    "type": "Link",
+    "label": "Sales Invoice",
+    "link_type": "DocType",
+    "link_to": "Sales Invoice",
+    "icon": "file-text",
+    "child": 1
+   },
+   {
+    "type": "Link",
+    "label": "Fee Collection Report",
     "link_type": "Report",
     "link_to": "Student Fee Collection Report",
+    "icon": "trending-up",
     "child": 1
    },
    {
     "type": "Link",
-    "label": "Fee Voucher in Bulk",
-    "link_type": "Report",
-    "link_to": "Fee Vouher in Bulk with Bank",
-    "child": 1
-   },
-   {
-    "type": "Link",
-    "label": "Monthly Outstanding / Dues",
+    "label": "Outstanding Fees",
     "link_type": "Report",
     "link_to": "Monthly Outstanding or Dues Report",
+    "icon": "alert-circle",
     "child": 1
    },
    {
     "type": "Link",
-    "label": "Sales Invoice Items",
+    "label": "Print Bulk Vouchers",
     "link_type": "Report",
-    "link_to": "Sales Invoice Item Report",
+    "link_to": "Fee Vouher in Bulk with Bank",
+    "icon": "printer",
     "child": 1
    },
    {
@@ -69,92 +113,228 @@
     "label": "Student Advance Payments",
     "link_type": "Report",
     "link_to": "Student Advance Payments",
+    "icon": "dollar-sign",
     "child": 1
    },
    {
     "type": "Link",
-    "label": "Journal Entry Report",
+    "label": "Sales Invoice Items",
     "link_type": "Report",
-    "link_to": "Journal Entry Report",
+    "link_to": "Sales Invoice Item Report",
+    "icon": "list",
     "child": 1
    },
    {
     "type": "Link",
-    "label": "Fee Voucher (Parent Wise)",
-    "link_type": "Report",
-    "link_to": "Fee Vouhcer Check Parent Wise",
+    "label": "Payment Entry",
+    "link_type": "DocType",
+    "link_to": "Payment Entry",
+    "icon": "credit-card",
     "child": 1
    },
    {
     "type": "Section Break",
-    "label": "Student Reports",
+    "label": "Attendance & Assessment",
     "collapsible": 1,
     "keep_closed": 0,
     "child": 0
    },
    {
     "type": "Link",
-    "label": "Student Strength Report",
+    "label": "Student Attendance Tool",
+    "link_type": "DocType",
+    "link_to": "Student Attendance Tool",
+    "icon": "check-square",
+    "child": 1
+   },
+   {
+    "type": "Link",
+    "label": "Exam Setup",
+    "link_type": "DocType",
+    "link_to": "Exam Setup",
+    "icon": "file-text",
+    "child": 1
+   },
+   {
+    "type": "Link",
+    "label": "Exam Setup Tool",
+    "link_type": "Page",
+    "link_to": "exam-tool",
+    "icon": "tool",
+    "child": 1
+   },
+   {
+    "type": "Link",
+    "label": "Marks Entry",
+    "link_type": "Page",
+    "link_to": "exam-marks",
+    "icon": "edit",
+    "child": 1
+   },
+   {
+    "type": "Link",
+    "label": "Result Card",
+    "link_type": "Page",
+    "link_to": "result-card",
+    "icon": "printer",
+    "child": 1
+   },
+   {
+    "type": "Section Break",
+    "label": "HR & Staff",
+    "collapsible": 1,
+    "keep_closed": 0,
+    "child": 0
+   },
+   {
+    "type": "Link",
+    "label": "Employees",
+    "link_type": "DocType",
+    "link_to": "Employee",
+    "icon": "briefcase",
+    "child": 1
+   },
+   {
+    "type": "Link",
+    "label": "Staff Attendance",
+    "link_type": "DocType",
+    "link_to": "Attendance",
+    "icon": "calendar",
+    "child": 1
+   },
+   {
+    "type": "Link",
+    "label": "Payroll Entry",
+    "link_type": "DocType",
+    "link_to": "Payroll Entry",
+    "icon": "dollar-sign",
+    "child": 1
+   },
+   {
+    "type": "Link",
+    "label": "Salary Slip",
+    "link_type": "DocType",
+    "link_to": "Salary Slip",
+    "icon": "file-plus",
+    "child": 1
+   },
+   {
+    "type": "Section Break",
+    "label": "Reports",
+    "collapsible": 1,
+    "keep_closed": 0,
+    "child": 0
+   },
+   {
+    "type": "Link",
+    "label": "Student Strength",
     "link_type": "Report",
     "link_to": "Student Strength Report",
+    "icon": "bar-chart",
     "child": 1
    },
    {
     "type": "Link",
-    "label": "Student Stuck Off Report",
+    "label": "Fee Summary",
     "link_type": "Report",
-    "link_to": "Student Stuck Off Report",
+    "link_to": "School Fee Summary",
+    "icon": "pie-chart",
     "child": 1
    },
    {
     "type": "Link",
-    "label": "Defaulter Students Report",
+    "label": "Admission Summary",
+    "link_type": "Report",
+    "link_to": "Admission Summary Report",
+    "icon": "user-check",
+    "child": 1
+   },
+   {
+    "type": "Link",
+    "label": "Guardian Contacts",
+    "link_type": "Report",
+    "link_to": "Guardian Contact Details",
+    "icon": "phone",
+    "child": 1
+   },
+   {
+    "type": "Link",
+    "label": "Guardian & Children",
+    "link_type": "Report",
+    "link_to": "Guardian with there Child Details Report",
+    "icon": "users",
+    "child": 1
+   },
+   {
+    "type": "Link",
+    "label": "Defaulter Students",
     "link_type": "Report",
     "link_to": "Defaulter Students Report",
+    "icon": "alert-triangle",
     "child": 1
    },
    {
     "type": "Link",
-    "label": "Graduated Students Report",
+    "label": "Graduated Students",
     "link_type": "Report",
     "link_to": "Graduated Students Report",
+    "icon": "award",
+    "child": 1
+   },
+   {
+    "type": "Link",
+    "label": "Student Stuck Off",
+    "link_type": "Report",
+    "link_to": "Student Stuck Off Report",
+    "icon": "x-circle",
     "child": 1
    },
    {
     "type": "Section Break",
-    "label": "Admission & Guardian",
+    "label": "Settings",
     "collapsible": 1,
     "keep_closed": 0,
     "child": 0
    },
    {
     "type": "Link",
-    "label": "Admission Summary Report",
-    "link_type": "Report",
-    "link_to": "Admission Summary Report",
-    "child": 1
-   },
-   {
-    "type": "Link",
-    "label": "Guardian Contact Details",
-    "link_type": "Report",
-    "link_to": "Guardian Contact Details",
-    "child": 1
-   },
-   {
-    "type": "Link",
-    "label": "Guardian with Child Details",
-    "link_type": "Report",
-    "link_to": "Guardian with there Child Details Report",
-    "child": 1
-   },
-   {
-    "type": "Link",
-    "label": "Settings",
+    "label": "Edvronix Settings",
     "link_type": "DocType",
     "link_to": "Edvronix Settings",
     "icon": "settings",
-    "child": 0
+    "child": 1
+   },
+   {
+    "type": "Link",
+    "label": "Academic Year",
+    "link_type": "DocType",
+    "link_to": "Academic Year",
+    "icon": "calendar",
+    "child": 1
+   },
+   {
+    "type": "Link",
+    "label": "Academic Term",
+    "link_type": "DocType",
+    "link_to": "Academic Term",
+    "icon": "clock",
+    "child": 1
+   },
+   {
+    "type": "Link",
+    "label": "Program",
+    "link_type": "DocType",
+    "link_to": "Program",
+    "icon": "book",
+    "child": 1
+   },
+   {
+    "type": "Link",
+    "label": "Course",
+    "link_type": "DocType",
+    "link_to": "Course",
+    "icon": "book-open",
+    "child": 1
    }
   ]
  }

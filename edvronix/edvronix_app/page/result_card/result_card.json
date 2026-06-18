@@ -1,0 +1,16 @@
+{
+ "doctype": "Page",
+ "name": "result-card",
+ "page_name": "result-card",
+ "module": "Edvronix App",
+ "standard": "Yes",
+ "title": "Result Card",
+ "roles": [
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "Academics User"
+  }
+ ]
+}

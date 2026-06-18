@@ -45,6 +45,7 @@ def execute(filters=None):
         "partial_paid": 1 if partial_paid else 0,
         "show_defaulters": 1 if show_defaulters else 0
     }
+    params["excl_defaulters"] = 1 if (only_outstanding and not show_defaulters and month) else 0
 
     # --- Invoice Data ---
     # When Show Defaulters + All months: one row per student per pending month
@@ -95,6 +96,11 @@ def execute(filters=None):
                 %(partial_paid)s = 0
                 OR (si.outstanding_amount > 0 AND si.outstanding_amount < si.grand_total)
             )
+            AND (%(excl_defaulters)s = 0 OR s.name NOT IN (
+                SELECT student FROM `tabSales Invoice`
+                WHERE docstatus = 1 AND outstanding_amount > 0
+                GROUP BY student HAVING COUNT(*) > 1
+            ))
         GROUP BY s.name
         HAVING (%(show_defaulters)s = 0 OR COUNT(si.name) > 1)
     """, params, as_dict=True)

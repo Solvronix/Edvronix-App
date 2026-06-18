@@ -1,0 +1,16 @@
+{
+ "doctype": "Page",
+ "name": "exam-marks",
+ "page_name": "exam-marks",
+ "module": "Edvronix App",
+ "standard": "Yes",
+ "title": "Marks Entry",
+ "roles": [
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "Academics User"
+  }
+ ]
+}

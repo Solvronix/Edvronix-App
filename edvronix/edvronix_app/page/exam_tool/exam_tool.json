@@ -1,0 +1,16 @@
+{
+ "doctype": "Page",
+ "name": "exam-tool",
+ "page_name": "exam-tool",
+ "module": "Edvronix App",
+ "standard": "Yes",
+ "title": "Exam Setup Tool",
+ "roles": [
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "Academics User"
+  }
+ ]
+}
