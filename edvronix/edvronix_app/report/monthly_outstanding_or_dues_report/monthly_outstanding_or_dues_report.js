@@ -58,6 +58,12 @@ frappe.query_reports["Monthly Outstanding or Dues Report"] = {
             fieldname: "partial_paid",
             label: __("Partial Paid"),
             fieldtype: "Check",
+        },
+        {
+            fieldname: "show_prior_outstanding",
+            label: __("Show Prior Outstanding"),
+            fieldtype: "Check",
+            default: 0
         }
     ]
 };

@@ -22,6 +22,7 @@ def execute(filters=None):
     only_outstanding = filters.get("only_outstanding")
     show_defaulters = filters.get("show_defaulters")
     partial_paid = filters.get("partial_paid")
+    show_prior_outstanding = filters.get("show_prior_outstanding")
 
     # Guard Clause
     if not any([student, program, academic_year, month]):
@@ -45,12 +46,16 @@ def execute(filters=None):
         "partial_paid": 1 if partial_paid else 0,
         "show_defaulters": 1 if show_defaulters else 0
     }
-    params["excl_defaulters"] = 1 if (only_outstanding and not show_defaulters and month) else 0
+    params["excl_defaulters"] = 1 if ((only_outstanding or show_prior_outstanding) and not show_defaulters and month) else 0
+    # When show_prior_outstanding alone (no only_outstanding), skip main data — only gap section shown
+    show_only_gap = bool(show_prior_outstanding and not only_outstanding and not show_defaulters)
 
     # --- Invoice Data ---
     # When Show Defaulters + All months: one row per student per pending month
     if show_defaulters and not month:
         data = get_defaulter_month_rows(params)
+    elif show_only_gap:
+        data = []
     else:
         data = frappe.db.sql("""
         SELECT
@@ -170,15 +175,43 @@ def execute(filters=None):
         """, arrears_params)
         arrears = flt(arrears_result[0][0]) if arrears_result else 0.0
 
+    if params.get("excl_defaulters"):
+        arrears = 0.0
+
     target = total_fee_sum + arrears
 
     if data and not data[-1].get("student"):
         data[-1]["outstanding"] = target - total_paid_sum
 
+    # --- Prior Outstanding (gap students) ---
+    gap_count, gap_amount = 0, 0.0
+    if params.get("excl_defaulters") and show_prior_outstanding:
+        gap_rows = get_gap_students(params)
+        if gap_rows:
+            gap_count = len(gap_rows)
+            gap_amount = sum(flt(r.get("outstanding")) for r in gap_rows)
+            data.append({
+                "student": "", "student_name": "<b>── Prior Outstanding (Previous Month Unpaid) ──</b>",
+                "student_mobile_number": "", "guardian_id": "", "guardian_name": "",
+                "fee_month": "", "total_fee": "", "paid_amount": "",
+                "outstanding": "", "status": "", "due_date": "", "payment_date": "",
+                "program": "", "student_category": "", "academic_year": "", "invoice_count": "",
+            })
+            data.extend(gap_rows)
+            data.append({
+                "student": "", "student_name": "<b>PRIOR TOTAL</b>",
+                "student_mobile_number": "", "guardian_id": "", "guardian_name": "",
+                "fee_month": "", "total_fee": gap_amount, "paid_amount": 0,
+                "outstanding": gap_amount, "status": "", "due_date": "", "payment_date": "",
+                "program": "", "student_category": "", "academic_year": "", "invoice_count": "",
+            })
+
     report_summary = [
         {"value": len(students_in_report), "label": "Total Students", "datatype": "Int", "indicator": "Blue"},
         {"value": total_fee_sum, "label": "Total Fee", "datatype": "Currency", "indicator": "Blue"},
         {"value": arrears, "label": "Arrears", "datatype": "Currency", "indicator": "Orange"},
+        {"value": gap_count, "label": "Prior Outstanding Students", "datatype": "Int", "indicator": "Orange"},
+        {"value": gap_amount, "label": "Prior Outstanding Amount", "datatype": "Currency", "indicator": "Red"},
         {"value": target, "label": "Target (Current Fee + Arrears)", "datatype": "Currency", "indicator": "Purple"},
         {"value": total_paid_sum, "label": "Total Paid", "datatype": "Currency", "indicator": "Green"},
         {"value": target - total_paid_sum, "label": "Outstanding (Target - Total Paid)", "datatype": "Currency", "indicator": "Red"},
@@ -247,5 +280,78 @@ def get_defaulter_month_rows(params):
             AND (%(academic_year)s = '' OR pe.academic_year = %(academic_year)s)
         GROUP BY s.name
         HAVING COUNT(si.name) > 1
+        ORDER BY s.student_name ASC
+    """, params, as_dict=True)
+
+
+def get_gap_students(params):
+    """
+    Gap students: zero-grand_total invoice for selected month + prior month outstanding.
+    Exactly 1 outstanding invoice total (not defaulters).
+    Works for any month and academic year.
+    Three subquery conditions avoid Cartesian-product bugs.
+    """
+    return frappe.db.sql("""
+        SELECT
+            s.name                                               AS student,
+            s.student_name                                       AS student_name,
+            s.student_mobile_number                              AS student_mobile_number,
+            g.name                                               AS guardian_id,
+            g.guardian_name                                      AS guardian_name,
+            MONTHNAME(MAX(si_out.due_date))                      AS fee_month,
+            MAX(si_out.due_date)                                 AS due_date,
+            pe.program                                           AS program,
+            pe.student_category                                  AS student_category,
+            pe.academic_year                                     AS academic_year,
+            COUNT(si_out.name)                                   AS invoice_count,
+            SUM(si_out.grand_total)                              AS total_fee,
+            SUM(si_out.grand_total - si_out.outstanding_amount)  AS paid_amount,
+            SUM(si_out.outstanding_amount)                       AS outstanding,
+            (
+                SELECT MAX(pe_entry.posting_date)
+                FROM `tabPayment Entry` pe_entry
+                INNER JOIN `tabPayment Entry Reference` per
+                    ON pe_entry.name = per.parent
+                INNER JOIN `tabSales Invoice` si2
+                    ON si2.name = per.reference_name
+                WHERE si2.student = s.name
+                  AND si2.docstatus = 1
+                  AND pe_entry.docstatus = 1
+            )                                                    AS payment_date,
+            'Prior Outstanding'                                  AS status
+        FROM `tabStudent` s
+        LEFT JOIN `tabStudent Guardian` sg ON sg.parent = s.name
+        LEFT JOIN `tabGuardian` g ON g.name = sg.guardian
+        LEFT JOIN `tabProgram Enrollment` pe
+            ON pe.student = s.name AND pe.docstatus = 1
+            AND (%(academic_year)s = '' OR pe.academic_year = %(academic_year)s)
+        INNER JOIN `tabSales Invoice` si_out
+            ON si_out.student = s.name
+            AND si_out.docstatus = 1
+            AND si_out.outstanding_amount > 0
+            AND si_out.due_date < (
+                SELECT MIN(due_date) FROM `tabSales Invoice`
+                WHERE docstatus = 1 AND MONTHNAME(due_date) = %(month_display)s
+            )
+        WHERE 1=1
+            AND (%(student)s       = '' OR s.name          = %(student)s)
+            AND (%(program)s       = '' OR pe.program       = %(program)s)
+            AND (%(academic_year)s = '' OR pe.academic_year = %(academic_year)s)
+            AND s.name IN (
+                SELECT student FROM `tabSales Invoice`
+                WHERE docstatus = 1 AND grand_total = 0
+                AND MONTHNAME(due_date) = %(month_display)s
+            )
+            AND s.name NOT IN (
+                SELECT student FROM `tabSales Invoice`
+                WHERE docstatus = 1 AND outstanding_amount > 0
+                AND MONTHNAME(due_date) = %(month_display)s
+            )
+            AND s.name NOT IN (
+                SELECT student FROM `tabSales Invoice`
+                WHERE docstatus = 1 AND outstanding_amount > 0
+                GROUP BY student HAVING COUNT(*) > 1
+            )
+        GROUP BY s.name
         ORDER BY s.student_name ASC
     """, params, as_dict=True)
