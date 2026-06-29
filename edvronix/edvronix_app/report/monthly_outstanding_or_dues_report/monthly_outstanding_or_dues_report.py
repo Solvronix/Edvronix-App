@@ -46,7 +46,6 @@ def execute(filters=None):
         "partial_paid": 1 if partial_paid else 0,
         "show_defaulters": 1 if show_defaulters else 0
     }
-    params["excl_defaulters"] = 1 if ((only_outstanding or show_prior_outstanding) and not show_defaulters and month) else 0
     # When show_prior_outstanding alone (no only_outstanding), skip main data — only gap section shown
     show_only_gap = bool(show_prior_outstanding and not only_outstanding and not show_defaulters)
 
@@ -101,11 +100,6 @@ def execute(filters=None):
                 %(partial_paid)s = 0
                 OR (si.outstanding_amount > 0 AND si.outstanding_amount < si.grand_total)
             )
-            AND (%(excl_defaulters)s = 0 OR s.name NOT IN (
-                SELECT student FROM `tabSales Invoice`
-                WHERE docstatus = 1 AND outstanding_amount > 0
-                GROUP BY student HAVING COUNT(*) > 1
-            ))
         GROUP BY s.name
         HAVING (%(show_defaulters)s = 0 OR COUNT(si.name) > 1)
     """, params, as_dict=True)
@@ -175,9 +169,6 @@ def execute(filters=None):
         """, arrears_params)
         arrears = flt(arrears_result[0][0]) if arrears_result else 0.0
 
-    if params.get("excl_defaulters"):
-        arrears = 0.0
-
     target = total_fee_sum + arrears
 
     if data and not data[-1].get("student"):
@@ -185,7 +176,7 @@ def execute(filters=None):
 
     # --- Prior Outstanding (gap students) ---
     gap_count, gap_amount = 0, 0.0
-    if params.get("excl_defaulters") and show_prior_outstanding:
+    if show_prior_outstanding and month:
         gap_rows = get_gap_students(params)
         if gap_rows:
             gap_count = len(gap_rows)
@@ -350,6 +341,8 @@ def get_gap_students(params):
             AND s.name NOT IN (
                 SELECT student FROM `tabSales Invoice`
                 WHERE docstatus = 1 AND outstanding_amount > 0
+                  AND due_date < (SELECT MIN(due_date) FROM `tabSales Invoice`
+                                  WHERE docstatus = 1 AND MONTHNAME(due_date) = %(month_display)s)
                 GROUP BY student HAVING COUNT(*) > 1
             )
         GROUP BY s.name
