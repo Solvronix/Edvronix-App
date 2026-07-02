@@ -93,17 +93,28 @@ def save_marks(plan_name, marks_data):
 	plan = frappe.get_doc("Assessment Plan", plan_name)
 	criteria_map = {c.assessment_criteria: c.maximum_score for c in plan.assessment_criteria}
 	saved = 0
+
+	# Lock the Assessment Plan row for the duration of this transaction so concurrent
+	# saves for the same plan queue up instead of racing to cancel the same result.
+	frappe.db.sql(
+		"SELECT name FROM `tabAssessment Plan` WHERE name = %s FOR UPDATE",
+		plan_name,
+	)
+
 	for entry in marks_data:
 		student = entry["student"]
 		scores = entry["scores"]
-		# Cancel any existing submitted result so we can re-create it
+
 		existing = frappe.db.get_value(
 			"Assessment Result",
 			{"student": student, "assessment_plan": plan_name, "docstatus": 1},
 			"name",
 		)
 		if existing:
-			frappe.get_doc("Assessment Result", existing).cancel()
+			try:
+				frappe.get_doc("Assessment Result", existing).cancel()
+			except frappe.exceptions.DoesNotExistError:
+				pass  # already cancelled by a concurrent request — continue
 
 		total = sum(float(scores.get(c, 0)) for c in criteria_map)
 		details = [

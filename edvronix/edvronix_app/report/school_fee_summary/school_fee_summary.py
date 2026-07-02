@@ -14,7 +14,7 @@ def execute(filters=None):
 def get_columns():
     return [
         {"label": "Total Students", "fieldname": "students", "fieldtype": "Int", "width": 120},
-        {"label": "Current Fee (March)", "fieldname": "current_fee", "fieldtype": "Currency", "width": 150},
+        {"label": "Current Fee (" + frappe.utils.formatdate(frappe.utils.today(), "MMMM") + ")", "fieldname": "current_fee", "fieldtype": "Currency", "width": 150},
         {"label": "Total Arrears", "fieldname": "arrears", "fieldtype": "Currency", "width": 130},
         {"label": "Total Receivable", "fieldname": "total_receivable", "fieldtype": "Currency", "width": 150},
         {"label": "Advance Payments", "fieldname": "advance", "fieldtype": "Currency", "width": 130},

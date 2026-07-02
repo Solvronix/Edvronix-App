@@ -101,16 +101,20 @@ def create_exam_plans(
 		})
 		es.insert(ignore_permissions=True)
 
-	# Derive assessment_group from academic term name
+	# Resolve assessment_group: match term name keywords against existing groups in the DB,
+	# so non-English and custom term names work instead of silently using an English fallback.
+	all_groups = frappe.get_all("Assessment Group", filters={"is_group": 0}, pluck="name")
 	term_lower = academic_term.lower()
-	if "first" in term_lower:
-		ag = "First Term Exams"
-	elif "mid" in term_lower:
-		ag = "Mid Term Exams"
-	elif "annual" in term_lower:
-		ag = "Annual Exams"
-	else:
-		ag = "First Term Exams"
+	ag = None
+	for keyword in ["annual", "mid", "first", "term", "exam"]:
+		if keyword in term_lower:
+			match = next((g for g in all_groups if keyword in g.lower()), None)
+			if match:
+				ag = match
+				break
+	if not ag:
+		# Fall back to the first available leaf Assessment Group, or create a default
+		ag = all_groups[0] if all_groups else "All Assessment Groups"
 
 	total_max = sum(float(s["max_marks"]) for s in subjects)
 	criteria_rows = [

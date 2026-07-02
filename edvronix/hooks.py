@@ -14,8 +14,15 @@ required_apps = ["erpnext", "education"]
 app_include_css = ["/assets/edvronix/css/edvronix_desk.css"]
 app_include_js  = ["/assets/edvronix/js/edvronix_desk.js"]
 
-# ── Post-migrate hook: fixes workspace child tables and number card filter ────
-after_migrate    = ["edvronix.patches.fix_workspace_number_cards.execute"]
+# ── Install / migrate / uninstall lifecycle hooks ─────────────────────────────
+# after_install : add the "Edvronix App" tile to existing users' Desktop Layouts
+# after_migrate : fix workspace child tables + number card filter, then self-heal
+#                 the desk tile so it re-appears if a layout froze it out
+after_install    = "edvronix.install.after_install"
+after_migrate    = [
+    "edvronix.patches.fix_workspace_number_cards.execute",
+    "edvronix.install.ensure_desktop_layout_entries",
+]
 before_uninstall = "edvronix.install.before_uninstall"
 
 # ── Document events ───────────────────────────────────────────────────────────
@@ -25,7 +32,6 @@ doc_events = {
     },
     "Student Applicant": {
         "before_insert": "edvronix.events.generate_student_email",
-        "before_save":   "edvronix.events.generate_student_email",
     },
     "Student": {
         "validate": "edvronix.events.prevent_enabling_graduated_student"
@@ -34,7 +40,9 @@ doc_events = {
         "on_update": "edvronix.workspace_utils.export_workspace_on_save"
     }
 }
-
+override_doctype_class = {
+	"Fee Schedule": "edvronix.fee_schedule_override.CustomFeeSchedule"
+}
 # ── Method overrides ──────────────────────────────────────────────────────────
 override_whitelisted_methods = {
     "frappe.desk.doctype.workspace.workspace.save_page": "edvronix.workspace_utils.save_page"
@@ -85,7 +93,8 @@ fixtures = [
             "edvronix-student-applicant-email-readonly",
             "edvronix-student-list-status",
             "edvronix-student-graduate-button",
-            "edvronix-exam-setup-progress"
+            "edvronix-exam-setup-progress",
+            "edvronix-fee-schedule-precheck"
         ]]]
     },
 ]

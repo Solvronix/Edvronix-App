@@ -127,11 +127,21 @@ def _fix_workspace_shortcut_width():
 	if not content_raw:
 		return
 
-	updated = content_raw
-	for name in SHORTCUTS_COL4:
-		narrow = f'{{"shortcut_name":"{name}","col":2}}'
-		wide   = f'{{"shortcut_name":"{name}","col":4}}'
-		updated = updated.replace(narrow, wide)
+	try:
+		content = json.loads(content_raw)
+	except (ValueError, TypeError):
+		return
 
-	if updated != content_raw:
-		frappe.db.set_value("Workspace", "Edvronix App", "content", updated)
+	changed = False
+	target_names = set(SHORTCUTS_COL4)
+	for block in content:
+		if not isinstance(block, dict):
+			continue
+		for item in block.get("items", []):
+			if isinstance(item, dict) and item.get("shortcut_name") in target_names:
+				if item.get("col") != 4:
+					item["col"] = 4
+					changed = True
+
+	if changed:
+		frappe.db.set_value("Workspace", "Edvronix App", "content", json.dumps(content))

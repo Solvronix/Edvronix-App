@@ -11,6 +11,7 @@
   "standard": 1,
   "hidden": 0,
   "restrict_removal": 0,
-  "bg_color": "gray"
+  "bg_color": "gray",
+  "module": "Edvronix App"
  }
 ]

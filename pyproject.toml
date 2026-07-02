@@ -4,7 +4,7 @@ authors = [
     { name = "Solvronix", email = "info@solvronix.com"}
 ]
 description = "School Management System by Solvronix"
-requires-python = ">=3.14"
+requires-python = ">=3.11"
 readme = "README.md"
 dynamic = ["version"]
 # ── Frappe ecosystem dependencies ────────────────────────────────────────────
@@ -36,7 +36,7 @@ packages = []
 
 [tool.ruff]
 line-length = 110
-target-version = "py314"
+target-version = "py311"
 
 [tool.ruff.lint]
 select = [

@@ -41,7 +41,7 @@ def get_columns():
             "width": 120
         },
         {
-            "label": _("Defaulter Date"),
+            "label": _("Date Disabled"),
             "fieldname": "defaulter_date",
             "fieldtype": "Date",
             "width": 120
@@ -95,7 +95,7 @@ def get_data(filters):
 
     # Convert enabled to readable status
     for d in data:
-        d["status"] = "Defaulter"
+        d["status"] = "Disabled"
 
     return data
 
@@ -103,7 +103,7 @@ def get_data(filters):
 def get_chart_data(data):
     return {
         "data": {
-            "labels": ["Defaulter Students"],
+            "labels": ["Disabled Students"],
             "datasets": [
                 {
                     "name": "Total",
@@ -121,7 +121,7 @@ def get_report_summary(data):
         {
             "value": len(data),
             "indicator": "Red",
-            "label": "Total Defaulter Students",
+            "label": "Total Disabled Students",
             "datatype": "Int"
         }
     ]

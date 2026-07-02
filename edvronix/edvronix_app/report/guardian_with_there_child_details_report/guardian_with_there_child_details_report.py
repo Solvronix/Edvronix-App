@@ -1,84 +1,78 @@
 import frappe
 from frappe import _
 
+
 def execute(filters=None):
     columns = get_columns()
-    data = []
+    data = get_data()
 
-    guardians = frappe.get_all(
-        "Guardian",
-        filters={"docstatus": ["<", 2]},
-        fields=["name", "guardian_name", "mobile_number", ]
-    )
-
-    total_students_count = 0
-
-    for g in guardians:
-        guardian_doc = frappe.get_doc("Guardian", g.name)
-        
-        student_ids = []
-        student_names = []
-
-        #  FIXED + EXTENDED LOGIC
-        children = guardian_doc.get("guardian_of") or guardian_doc.get("students") or []
-
-        for row in children:
-            if not row.student:
-                continue
-
-            student_ids.append(row.student)
-            total_students_count += 1
-
-            # Always get student name from Student doctype
-            student_name = frappe.db.get_value(
-                "Student", row.student, "student_name"
-            ) or row.student
-
-            #  Get latest Program Enrollment
-            enrollment = frappe.db.get_value(
-                "Program Enrollment",
-                {
-                    "student": row.student,
-                    "docstatus": 1
-                },
-                ["program", "student_category", "custom_tuition_fee"],
-                order_by="creation desc",
-                as_dict=True
-            )
-
-            program = enrollment.program if enrollment else "N/A"
-            category = enrollment.student_category if enrollment else "N/A"
-            fee = enrollment.custom_tuition_fee if enrollment else "N/A"
-
-            #  FINAL FORMAT YOU ASKED
-            student_names.append(
-                f"{student_name} ({program}, {category}, {fee})"
-            )
-
-        data.append({
-            "guardian_id": g.name,
-            "guardian_name": g.guardian_name,
-            "mobile_number": g.mobile_number,
-            "student": ", ".join(student_ids) if student_ids else None,
-            "student_name": ", ".join(student_names) if student_names else None
-        })
+    total_guardians = len({row["guardian_id"] for row in data})
+    total_students = sum(1 for row in data if row.get("student"))
 
     report_summary = [
-        {
-            "label": _("Total Guardians"),
-            "value": len(guardians),
-            "datatype": "Int",
-            "indicator": "Blue"
-        },
-        {
-            "label": _("Total Students Linked"),
-            "value": total_students_count,
-            "datatype": "Int",
-            "indicator": "Green"
-        }
+        {"label": _("Total Guardians"), "value": total_guardians, "datatype": "Int", "indicator": "Blue"},
+        {"label": _("Total Students Linked"), "value": total_students, "datatype": "Int", "indicator": "Green"},
     ]
-
     return columns, data, None, None, report_summary
+
+
+def get_data():
+    # Single query: Guardian → Student Guardian → Student → latest Program Enrollment.
+    # Uses a correlated subquery to pick only the most recent submitted enrollment per student.
+    rows = frappe.db.sql("""
+        SELECT
+            g.name                  AS guardian_id,
+            g.guardian_name,
+            g.mobile_number,
+            s.name                  AS student,
+            s.student_name,
+            pe.program,
+            pe.student_category,
+            pe.custom_tuition_fee
+        FROM `tabGuardian` g
+        LEFT JOIN `tabStudent Guardian` sg
+            ON sg.guardian = g.name AND sg.parenttype = 'Student'
+        LEFT JOIN `tabStudent` s
+            ON s.name = sg.parent
+        LEFT JOIN `tabProgram Enrollment` pe
+            ON pe.student = s.name
+            AND pe.docstatus = 1
+            AND pe.creation = (
+                SELECT MAX(pe2.creation)
+                FROM `tabProgram Enrollment` pe2
+                WHERE pe2.student = s.name AND pe2.docstatus = 1
+            )
+        WHERE g.docstatus < 2
+        ORDER BY g.guardian_name, s.student_name
+    """, as_dict=True)
+
+    # Collapse multiple student rows per guardian into one display row
+    seen = {}
+    result = []
+    for row in rows:
+        gid = row["guardian_id"]
+        if gid not in seen:
+            seen[gid] = {
+                "guardian_id": gid,
+                "guardian_name": row["guardian_name"],
+                "mobile_number": row["mobile_number"],
+                "_details": [],
+                "_ids": [],
+            }
+            result.append(seen[gid])
+        if row.get("student"):
+            detail = row["student_name"] or row["student"]
+            parts = [p for p in [row.get("program"), row.get("student_category"), row.get("custom_tuition_fee")] if p]
+            if parts:
+                detail += " (" + ", ".join(str(p) for p in parts) + ")"
+            seen[gid]["_details"].append(detail)
+            seen[gid]["_ids"].append(row["student"])
+
+    for entry in result:
+        entry["student"] = ", ".join(entry.pop("_ids")) or None
+        entry["student_name"] = ", ".join(entry.pop("_details")) or None
+
+    return result
 
 
 def get_columns():
@@ -87,5 +81,5 @@ def get_columns():
         {"label": _("Guardian Name"), "fieldname": "guardian_name", "fieldtype": "Data", "width": 180},
         {"label": _("Mobile Number"), "fieldname": "mobile_number", "fieldtype": "Data", "width": 135},
         {"label": _("Student IDs"), "fieldname": "student", "fieldtype": "Small Text", "width": 200},
-        {"label": _("Student Details"), "fieldname": "student_name", "fieldtype": "Small Text", "width": 600}
+        {"label": _("Student Details"), "fieldname": "student_name", "fieldtype": "Small Text", "width": 600},
     ]
